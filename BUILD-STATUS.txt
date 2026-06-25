@@ -1,0 +1,5 @@
+BUILD_ID: 8JaHhoICoKzLf8Uh9Enw-
+Status: GREEN
+Pages: 21 routes (4 blog posts, 5 service pages)
+Images: 12 (9 HF-generated barndo images + blog-default, og-image, about-agent)
+Date: 2026-06-25

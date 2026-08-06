@@ -56,6 +56,12 @@ export function Hero() {
                   Get a Free Quote
                   <ArrowRight className="w-4 h-4" />
                 </Link>
+                <Link
+                  href="/homeowners-application"
+                  className="inline-flex items-center justify-center gap-2 border-2 border-brand text-brand px-7 py-3.5 rounded-xl font-body font-bold text-base hover:bg-brand hover:text-white transition-all"
+                >
+                  Homeowners Application
+                </Link>
                 <a
                   href={SITE.phoneHref}
                   className="inline-flex items-center justify-center gap-2 border-2 border-brand text-brand px-7 py-3.5 rounded-xl font-body font-bold text-base hover:bg-brand hover:text-white transition-all"

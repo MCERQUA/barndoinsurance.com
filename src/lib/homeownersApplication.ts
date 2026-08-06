@@ -853,3 +853,15 @@ export const HA_FIELD_NAMES: string[] = [
 ];
 
 export const HA_FORM_NAME = "homeowners-application";
+
+/**
+ * Required fields. NOT from the PDF -- the source AcroForm marks nothing
+ * required. Mike 2026-08-06: a submission with no contact details is not an
+ * actionable lead and invites spam. These three only; every other field stays
+ * optional exactly as the PDF has it.
+ */
+export const HA_REQUIRED: string[] = [
+  "primary_applicant_-_full_legal_name_1",
+  "primary_phone_7",
+  "email_address_9",
+];

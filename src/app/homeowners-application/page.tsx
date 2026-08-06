@@ -11,11 +11,14 @@ import {
   HOMEOWNERS_APPLICATION,
   HA_FIELD_NAMES,
   HA_FORM_NAME,
+  HA_REQUIRED,
   type HAField,
 } from "@/lib/homeownersApplication";
 
 /** DOM id for a PDF field name (names contain "/", "(", "," and spaces). */
 const idFor = (name: string) => `ha-${name.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
+
+const isRequired = (name: string) => HA_REQUIRED.includes(name);
 
 /** Fields the PDF lays out as a full-width multi-line box. */
 const isLongText = (label: string) =>
@@ -83,6 +86,7 @@ export default function HomeownersApplicationPage() {
     <>
       <label htmlFor={idFor(f.name)} className={LABEL_CLASS}>
         {f.label}
+        {isRequired(f.name) && <span className="text-ember-orange ml-1">*</span>}
       </label>
       {isLongText(f.label) ? (
         <textarea
@@ -99,6 +103,7 @@ export default function HomeownersApplicationPage() {
           id={idFor(f.name)}
           name={f.name}
           type="text"
+          required={isRequired(f.name)}
           maxLength={f.maxlen}
           value={values[f.name] ?? ""}
           onChange={(e) => setText(f.name, e.target.value)}

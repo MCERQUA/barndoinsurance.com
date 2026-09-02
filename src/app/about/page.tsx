@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle, Phone } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CTABand } from "@/components/sections/CTABand";
@@ -71,9 +71,6 @@ export default function AboutPage() {
                   <Link href="/quote" className="inline-flex items-center justify-center gap-2 bg-ember-orange text-white px-7 py-3.5 rounded-lg font-body font-bold hover:bg-ember-orange-dark transition-colors">
                     Get a Free Quote
                   </Link>
-                  <a href={SITE.phoneHref} className="inline-flex items-center justify-center gap-2 border-2 border-forest-green text-forest-green px-7 py-3.5 rounded-lg font-body font-bold hover:bg-forest-green hover:text-white transition-colors">
-                    <Phone className="w-4 h-4" />{SITE.phone}
-                  </a>
                 </div>
               </div>
             </FadeIn>

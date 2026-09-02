@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle, Phone } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { FadeIn } from "@/components/animations/FadeIn";
@@ -100,8 +100,7 @@ export default function QuotePage() {
                       <h2 className="font-heading text-2xl text-bark font-bold mb-3">Quote Request Received!</h2>
                       <p className="font-body text-muted mb-2">We&apos;ll prepare your barndominium insurance quote and be in touch today.</p>
                       <p className="font-body text-sm text-muted">
-                        For immediate assistance, call{" "}
-                        <a href={SITE.phoneHref} className="text-forest-green font-bold">{SITE.phone}</a>
+                        We&apos;ll be in touch shortly.
                       </p>
                     </div>
                   ) : (
@@ -170,8 +169,8 @@ export default function QuotePage() {
                         {error && (
                           <div className="rounded-lg border border-ember-orange/40 bg-ember-orange/10 px-4 py-3">
                             <p className="font-body text-sm font-bold text-ember-orange">
-                              Something went wrong — please call{" "}
-                              <a href={SITE.phoneHref} className="underline">{SITE.phone}</a> or try again.
+                              Something went wrong — please email{" "}
+                              <a href={`mailto:${SITE.email}`} className="underline">{SITE.email}</a> or try again.
                             </p>
                           </div>
                         )}
@@ -192,14 +191,13 @@ export default function QuotePage() {
               <aside className="space-y-5">
                 <FadeIn direction="left">
                   <div className="bg-forest-green rounded-2xl p-7">
-                    <h3 className="font-heading text-lg text-white font-bold mb-3">Prefer to Call?</h3>
+                    <h3 className="font-heading text-lg text-white font-bold mb-3">Homeowners Application</h3>
                     <p className="font-body text-white/70 text-sm mb-4">
-                      Our barndominium insurance specialists are ready to quote you now.
+                      Need full homeowners coverage? Complete our detailed application for the best rates.
                     </p>
-                    <a href={SITE.phoneHref} className="flex items-center gap-2 text-ember-orange font-body font-bold">
-                      <Phone className="w-4 h-4" />{SITE.phone}
-                    </a>
-                    <p className="font-body text-white/50 text-xs mt-2">{SITE.hours}</p>
+                    <Link href="/homeowners-application" className="flex items-center gap-2 text-ember-orange font-body font-bold">
+                      Start Application →
+                    </Link>
                   </div>
                 </FadeIn>
                 <FadeIn direction="left" delay={0.05}>

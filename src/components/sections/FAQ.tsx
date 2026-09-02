@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronDown, Phone } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { FAQS, SITE } from "@/lib/site";
 import { FadeIn } from "@/components/animations/FadeIn";
 import Link from "next/link";
@@ -81,12 +81,6 @@ export function FAQ() {
               <span className="text-muted">Talk to a barndominium insurance specialist.</span>
             </p>
             <div className="flex items-center gap-3 flex-shrink-0">
-              <a
-                href={SITE.phoneHref}
-                className="inline-flex items-center gap-2 bg-cta text-white px-5 py-2.5 rounded-full font-body text-sm font-bold shadow-cta hover:bg-cta-dark transition-colors"
-              >
-                <Phone className="w-4 h-4" /> {SITE.phone}
-              </a>
               <Link
                 href="/quote"
                 className="inline-flex items-center font-body text-sm font-bold text-brand hover:text-brand-700 transition-colors"

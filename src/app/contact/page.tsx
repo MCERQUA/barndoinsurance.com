@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Phone, Mail, Clock, MapPin, CheckCircle } from "lucide-react";
+import { Mail, Clock, MapPin, CheckCircle } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { FadeIn } from "@/components/animations/FadeIn";
@@ -128,15 +128,6 @@ export default function ContactPage() {
                     <div className="space-y-4">
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 bg-forest-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <Phone className="w-4 h-4 text-forest-green" />
-                        </div>
-                        <div>
-                          <p className="font-body text-xs text-muted">Phone</p>
-                          <a href={SITE.phoneHref} className="font-body font-bold text-bark hover:text-ember-orange transition-colors">{SITE.phone}</a>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 bg-forest-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
                           <Mail className="w-4 h-4 text-forest-green" />
                         </div>
                         <div>
@@ -169,8 +160,8 @@ export default function ContactPage() {
                 <FadeIn direction="left" delay={0.1}>
                   <div className="bg-ember-orange/10 border border-ember-orange/20 rounded-2xl p-6">
                     <p className="font-body text-sm font-bold text-ember-orange mb-2">Need a Certificate Quickly?</p>
-                    <p className="font-body text-sm text-bark mb-3">We issue certificates and additional insured endorsements same-day. Call us directly for fastest service.</p>
-                    <a href={SITE.phoneHref} className="font-body text-sm font-bold text-forest-green hover:text-ember-orange transition-colors">Call {SITE.phone} now →</a>
+                    <p className="font-body text-sm text-bark mb-3">We issue certificates and additional insured endorsements same-day. Email us for fastest service.</p>
+                    <a href={`mailto:${SITE.email}`} className="font-body text-sm font-bold text-forest-green hover:text-ember-orange transition-colors">Email us now →</a>
                   </div>
                 </FadeIn>
               </div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Warehouse } from "lucide-react";
+import { Mail, MapPin, Warehouse } from "lucide-react";
 import { SITE, SERVICES, NAV_LINKS } from "@/lib/site";
 
 export function Footer() {
@@ -26,9 +26,6 @@ export function Footer() {
               won&rsquo;t write. Licensed in all 50 states since 2005.
             </p>
             <div className="space-y-2.5">
-              <a href={SITE.phoneHref} className="flex items-center gap-2 font-body text-sm text-cedar-bright hover:text-cedar transition-colors">
-                <Phone className="w-4 h-4" />{SITE.phone}
-              </a>
               <a href={`mailto:${SITE.email}`} className="flex items-center gap-2 font-body text-sm text-white/65 hover:text-white transition-colors">
                 <Mail className="w-4 h-4" />{SITE.email}
               </a>
@@ -72,15 +69,11 @@ export function Footer() {
           <div>
             <h3 className="font-heading font-bold text-white mb-4 text-sm uppercase tracking-[0.14em]">Ready to Get Insured?</h3>
             <p className="font-body text-sm text-white/65 mb-4">
-              Same-day barndo quotes with builders-risk-to-dwelling handled. Call us or start your
-              quote online.
+              Same-day barndo quotes with builders-risk-to-dwelling handled. Start your quote online.
             </p>
-            <Link href="/quote" className="block w-full bg-cta text-white text-center px-4 py-3 rounded-xl font-body font-bold text-sm shadow-cta hover:bg-cta-dark transition-colors mb-3">
+            <Link href="/quote" className="block w-full bg-cta text-white text-center px-4 py-3 rounded-xl font-body font-bold text-sm shadow-cta hover:bg-cta-dark transition-colors">
               Get a Free Quote
             </Link>
-            <a href={SITE.phoneHref} className="block w-full text-center border border-white/25 text-white px-4 py-2.5 rounded-xl font-body text-sm hover:border-white/60 hover:bg-white/5 transition-colors">
-              Call {SITE.phone}
-            </a>
           </div>
         </div>
 

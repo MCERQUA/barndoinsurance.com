@@ -27,7 +27,6 @@ const jsonLd = {
   name: SITE.name,
   description: SITE.description,
   url: SITE.url,
-  telephone: SITE.phone,
   email: SITE.email,
   address: {
     "@type": "PostalAddress",

@@ -6,6 +6,7 @@ export const SITE = {
   description: "Specialty insurance for barndominiums — most standard carriers decline or misclassify them. We shop the markets that write barndo coverage right: dwelling, builders risk, shop coverage, farm and ranch. Licensed in all 50 states.",
   phone: "844-967-5247",
   phoneHref: "tel:+18449675247",
+  phoneE164: "+18449675247",
   email: "josh@contractorschoiceagency.com",
   founded: 2005,
   npn: "8608479",
@@ -524,7 +525,7 @@ export const FAQS = [
   },
   {
     q: "How do I get a barndominium insurance quote?",
-    a: "Call 844-967-5247 or submit a quote request. We need: property address, approximate square footage, year built, construction type (steel frame / post-frame / metal siding), estimated replacement value, how the structure is used, and any farm/agricultural operations on the property. Same-day quotes in most cases.",
+    a: "Submit a quote request online. We need: property address, approximate square footage, year built, construction type (steel frame / post-frame / metal siding), estimated replacement value, how the structure is used, and any farm/agricultural operations on the property. Same-day quotes in most cases.",
   },
 ] as const;
 

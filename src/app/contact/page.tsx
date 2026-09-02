@@ -105,7 +105,7 @@ export default function ContactPage() {
                         <div className="rounded-lg border border-ember-orange/40 bg-ember-orange/10 px-4 py-3">
                           <p className="font-body text-sm font-bold text-ember-orange">
                             Something went wrong — please call{" "}
-                            <a href={SITE.phoneHref} className="underline">{SITE.phone}</a> or try again.
+                            use the form above or email <a href={`mailto:${SITE.email}`} className="underline">{SITE.email}</a>.
                           </p>
                         </div>
                       )}

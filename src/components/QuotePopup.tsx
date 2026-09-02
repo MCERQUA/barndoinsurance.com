@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { X, ArrowRight } from "lucide-react";
 import { SITE } from "@/lib/site";
@@ -30,10 +30,11 @@ export function FloatingQuoteBar() {
 
 export function QuotePopup() {
   const [visible, setVisible] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (sessionStorage.getItem("quote-popup-dismissed")) return;
-    const t = setTimeout(() => setVisible(true), 1800);
+    const t = setTimeout(() => setVisible(true), 4000);
     return () => clearTimeout(t);
   }, []);
 
@@ -41,6 +42,26 @@ export function QuotePopup() {
     sessionStorage.setItem("quote-popup-dismissed", "1");
     setVisible(false);
   };
+
+  // Esc closes it, and focus stays inside while it is open.
+  useEffect(() => {
+    if (!visible) return;
+    const panel = panelRef.current;
+    const sel = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const focusables = () => Array.from(panel?.querySelectorAll<HTMLElement>(sel) ?? []);
+    focusables()[0]?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { dismiss(); return; }
+      if (e.key !== "Tab") return;
+      const f = focusables();
+      if (f.length === 0) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [visible]);
 
   if (!visible) return null;
 
@@ -59,7 +80,7 @@ export function QuotePopup() {
       />
 
       {/* Panel */}
-      <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div ref={panelRef} className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden">
         {/* Header bar */}
         <div className="bg-forest-green px-6 py-5">
           <button

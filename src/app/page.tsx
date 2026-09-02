@@ -20,7 +20,6 @@ const jsonLd = {
       "@id": `${SITE.url}/#business`,
       name: SITE.name,
       url: SITE.url,
-      telephone: SITE.phone,
       email: SITE.email,
       description: SITE.description,
       address: {

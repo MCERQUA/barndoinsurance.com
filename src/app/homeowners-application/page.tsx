@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { CheckCircle, Phone, Mail, ArrowRight } from "lucide-react";
+import { CheckCircle, Mail, ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { FadeIn } from "@/components/animations/FadeIn";
@@ -148,13 +148,6 @@ export default function HomeownersApplicationPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href={SITE.phoneHref}
-                  className="inline-flex items-center gap-2 font-body text-sm text-white/90 hover:text-white transition-colors"
-                >
-                  <Phone className="w-4 h-4" />
-                  {SITE.phone}
-                </a>
-                <a
                   href={`mailto:${SITE.email}`}
                   className="inline-flex items-center gap-2 font-body text-sm text-white/90 hover:text-white transition-colors"
                 >
@@ -180,10 +173,7 @@ export default function HomeownersApplicationPage() {
                     it and be in touch, usually the same business day.
                   </p>
                   <p className="font-body text-sm text-muted mb-6">
-                    For immediate assistance, call{" "}
-                    <a href={SITE.phoneHref} className="text-forest-green font-bold">
-                      {SITE.phone}
-                    </a>{" "}
+                    For immediate assistance, call{" "}{" "}
                     or email{" "}
                     <a
                       href={`mailto:${SITE.email}`}
@@ -398,7 +388,7 @@ export default function HomeownersApplicationPage() {
                   <div className="rounded-lg border border-ember-orange/40 bg-ember-orange/10 px-4 py-3 mb-5">
                     <p className="font-body text-sm font-bold text-ember-orange">
                       Something went wrong submitting your application. Please call{" "}
-                      {SITE.phone} or email {SITE.email} and we&apos;ll take it over the phone.
+                      email {SITE.email} and we&apos;ll take it from there.
                     </p>
                   </div>
                 )}

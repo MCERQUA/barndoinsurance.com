@@ -98,14 +98,10 @@ export function QuotePopup() {
 
         {/* Body */}
         <div className="px-6 py-6">
-          <p className="font-body text-bark text-sm leading-relaxed mb-4">
-            By submitting your information online, our AI software gathers everything we need to prepare your quote accurately — so our agents can work more efficiently and get back to you faster.
-          </p>
+          <p className="font-body text-bark text-sm leading-relaxed mb-4">Our agents are working on quotes now, and submitting online lets our AI gather what we need.</p>
           <p className="font-body text-bark text-sm leading-relaxed mb-3">
-            If you&apos;d prefer to speak with someone, you&apos;re welcome to submit the form first and then call us at{" "}
-            <a href={`tel:${SITE.phoneE164}`} className="font-bold text-forest-green hover:text-ember-orange transition-colors whitespace-nowrap">
-              {SITE.phone}
-            </a>.
+            If you&apos;d prefer to speak with someone please call us at{" "}
+            <a href={`tel:${SITE.phoneE164}`} className="font-bold text-forest-green hover:text-ember-orange transition-colors whitespace-nowrap"> {SITE.phone} </a>
           </p>
           <div className="bg-ember-orange/10 border border-ember-orange/20 rounded-xl px-4 py-3 mb-6">
             <p className="font-body text-bark text-sm font-bold mb-0.5">Submit what you can — every bit helps.</p>

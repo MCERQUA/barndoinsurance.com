@@ -6,20 +6,41 @@ import { X, ArrowRight } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 export function FloatingQuoteBar() {
+  const barRef = useRef<HTMLDivElement>(null);
+
+  // Reserve the bar's own height at the end of the page so no in-flow control can sit under it.
+  // Measured rather than hard-coded: the bar wraps to two lines on narrow viewports.
+  useEffect(() => {
+    const el = barRef.current;
+    if (!el) return;
+    const apply = () => {
+      document.body.style.paddingBottom =
+        `calc(${el.offsetHeight}px + env(safe-area-inset-bottom, 0px))`;
+    };
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+    window.addEventListener("resize", apply);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", apply);
+      document.body.style.paddingBottom = "";
+    };
+  }, []);
   return (
-    <div className="fixed bottom-0 inset-x-0 z-[9998] bg-forest-green border-t-2 border-ember-orange shadow-2xl">
+    <div ref={barRef} className="pointer-events-none fixed bottom-0 inset-x-0 z-[9998] bg-forest-green border-t-2 border-ember-orange shadow-2xl">
       <div className="max-w-5xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
         <p className="font-body text-white text-sm text-center sm:text-left">
           <span className="font-bold">Our agents are working on quotes now.</span>{" "}
           Submit online to get in the queue faster — or call{" "}
-          <a href={`tel:${SITE.phoneE164}`} className="font-bold text-ember-orange hover:text-amber-300 transition-colors whitespace-nowrap">
+          <a href={`tel:${SITE.phoneE164}`} className="pointer-events-auto font-bold text-ember-orange hover:text-amber-300 transition-colors whitespace-nowrap">
             {SITE.phone}
           </a>
           .
         </p>
         <Link
           href="/quote"
-          className="flex-shrink-0 flex items-center gap-1.5 bg-ember-orange text-white px-5 py-2 rounded-full font-body font-bold text-sm hover:bg-ember-orange-dark transition-colors whitespace-nowrap shadow-sm"
+          className="flex-shrink-0 flex items-center gap-1.5 pointer-events-auto bg-ember-orange text-white px-5 py-2 rounded-full font-body font-bold text-sm hover:bg-ember-orange-dark transition-colors whitespace-nowrap shadow-sm"
         >
           Request a Quote <ArrowRight className="w-3.5 h-3.5" />
         </Link>
@@ -103,7 +124,7 @@ export function QuotePopup() {
           </p>
           <p className="font-body text-bark text-sm leading-relaxed mb-3">
             If you&apos;d prefer to speak with someone please call us at{" "}
-            <a href={`tel:${SITE.phoneE164}`} className="font-bold text-forest-green hover:text-ember-orange transition-colors whitespace-nowrap"> {SITE.phone} </a>
+            <a href={`tel:${SITE.phoneE164}`} className="pointer-events-auto font-bold text-forest-green hover:text-ember-orange transition-colors whitespace-nowrap"> {SITE.phone} </a>
           </p>
           <div className="bg-ember-orange/10 border border-ember-orange/20 rounded-xl px-4 py-3 mb-6">
             <p className="font-body text-bark text-sm font-bold mb-0.5">Submit what you can — every bit helps.</p>

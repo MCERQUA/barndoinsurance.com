@@ -8,10 +8,12 @@ import { Footer } from "@/components/sections/Footer";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { SITE } from "@/lib/site";
 
+const STATE_OPTIONS: [string, string][] = [["AL", "Alabama"], ["AK", "Alaska"], ["AZ", "Arizona"], ["AR", "Arkansas"], ["CA", "California"], ["CO", "Colorado"], ["CT", "Connecticut"], ["DE", "Delaware"], ["DC", "District of Columbia"], ["FL", "Florida"], ["GA", "Georgia"], ["HI", "Hawaii"], ["ID", "Idaho"], ["IL", "Illinois"], ["IN", "Indiana"], ["IA", "Iowa"], ["KS", "Kansas"], ["KY", "Kentucky"], ["LA", "Louisiana"], ["ME", "Maine"], ["MD", "Maryland"], ["MA", "Massachusetts"], ["MI", "Michigan"], ["MN", "Minnesota"], ["MS", "Mississippi"], ["MO", "Missouri"], ["MT", "Montana"], ["NE", "Nebraska"], ["NV", "Nevada"], ["NH", "New Hampshire"], ["NJ", "New Jersey"], ["NM", "New Mexico"], ["NY", "New York"], ["NC", "North Carolina"], ["ND", "North Dakota"], ["OH", "Ohio"], ["OK", "Oklahoma"], ["OR", "Oregon"], ["PA", "Pennsylvania"], ["RI", "Rhode Island"], ["SC", "South Carolina"], ["SD", "South Dakota"], ["TN", "Tennessee"], ["TX", "Texas"], ["UT", "Utah"], ["VT", "Vermont"], ["VA", "Virginia"], ["WA", "Washington"], ["WV", "West Virginia"], ["WI", "Wisconsin"], ["WY", "Wyoming"]];
+
 export default function QuotePage() {
   const [formData, setFormData] = useState({
     name: "", company: "", email: "", phone: "",
-    propertyAddress: "", barndominium: "", squareFootage: "",
+    propertyAddress: "", city: "", zip: "", barndominium: "", squareFootage: "",
     yearBuilt: "", estimatedValue: "", farmOperations: "", state: "", message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -130,6 +132,8 @@ export default function QuotePage() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                           {field("propertyAddress", "Property Address")}
+                          {field("city", "City")}
+                          {field("zip", "ZIP Code")}
                           {select("barndominium", "Property Type", [
                             "Barndominium (steel frame / metal siding)",
                             "Pole-barn / post-frame home",
@@ -150,7 +154,23 @@ export default function QuotePage() {
                             "Working farm / ranch",
                             "Agricultural income",
                           ])}
-                          {field("state", "State")}
+                          <div key="state">
+                            <label className="block font-body text-sm font-bold text-bark mb-1.5">
+                              State<span className="text-ember-orange ml-1">*</span>
+                            </label>
+                            <select
+                              name="state"
+                              required
+                              value={formData.state}
+                              onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                              className="w-full px-4 py-2.5 border border-border rounded-lg font-body text-sm text-bark focus:outline-none focus:border-forest-green bg-white"
+                            >
+                              <option value="">Select...</option>
+                              {STATE_OPTIONS.map(([value, label]) => (
+                                <option key={value} value={value}>{label}</option>
+                              ))}
+                            </select>
+                          </div>
                         </div>
 
                         <div>

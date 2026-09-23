@@ -34,7 +34,9 @@ function renderMarkdown(content: string): React.ReactNode[] {
   let key = 0;
 
   function inlineRender(text: string): string {
-    return text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    return text
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" class="underline">$1</a>');
   }
 
   for (const block of paragraphs) {

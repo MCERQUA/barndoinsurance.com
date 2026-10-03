@@ -28,6 +28,7 @@ export function FadeIn({ children, delay = 0, direction = "up", className }: Fad
       animate={isInView ? { opacity: 1, y: 0, x: 0 } : {}}
       transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
+      data-fade-x={direction === "left" || direction === "right" ? "" : undefined}
     >
       {children}
     </motion.div>

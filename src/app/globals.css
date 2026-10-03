@@ -130,3 +130,10 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Below lg every column is full-width, so FadeIn's sideways entrance
+   (translateX 24px) put cards 8px past a 390 viewport until they animated in.
+   Sideways slides stay on desktop; mobile keeps the fade. */
+@media (max-width: 1023px) {
+  [data-fade-x] { transform: none !important; }
+}

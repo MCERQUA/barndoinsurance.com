@@ -132,7 +132,7 @@ export default function ContactPage() {
                         </div>
                         <div>
                           <p className="font-body text-xs text-muted">Email</p>
-                          <a href={`mailto:${SITE.email}`} className="font-body font-bold text-bark hover:text-ember-orange transition-colors">{SITE.email}</a>
+                          <a href={`mailto:${SITE.email}`} className="font-body font-bold text-bark hover:text-ember-orange transition-colors break-all">{SITE.email}</a>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">

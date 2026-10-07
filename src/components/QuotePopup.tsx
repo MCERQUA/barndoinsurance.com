@@ -113,22 +113,33 @@ export function QuotePopup() {
           </button>
           <p className="text-xs font-body font-bold uppercase tracking-widest text-white/70 mb-1">A note from our team</p>
           <h2 id="popup-title" className="font-heading font-extrabold text-white text-xl leading-snug">
-            Our agents are actively working on quotes right now
+            Thank you for visiting our site! Let&apos;s Get Your Quote Started!!
           </h2>
         </div>
 
         {/* Body */}
         <div className="px-6 py-6">
-          <p className="font-body text-bark text-sm leading-relaxed mb-4">
-            By submitting your information online, our AI software gathers everything we need to prepare your quote accurately — so our agents can work more efficiently and get back to you faster.
+          <p className="font-body text-bark text-sm leading-relaxed mb-3">
+            Our agents are actively working on quotes and helping customers find the right coverage.
           </p>
           <p className="font-body text-bark text-sm leading-relaxed mb-3">
-            If you&apos;d prefer to speak with someone please call us at{" "}
-            <a href={`tel:${SITE.phoneE164}`} className="pointer-events-auto font-bold text-forest-green hover:text-ember-orange transition-colors whitespace-nowrap"> {SITE.phone} </a>
+            The fastest way to get started is to submit your information online. Our technology helps organize the details you provide so our agents can spend more time reviewing your needs, comparing options, and preparing your quote.
+          </p>
+          <p className="font-body text-bark text-sm leading-relaxed mb-3">
+            Don&apos;t worry if you don&apos;t have all the answers.
+          </p>
+          <p className="font-body text-bark text-sm leading-relaxed mb-3">
+            Just fill out what you can. Even partial information helps us get started, and one of our agents will follow up if we need anything else.
+          </p>
+          <p className="font-body text-bark text-sm leading-relaxed mb-1">
+            Prefer to speak with someone?
+          </p>
+          <p className="font-body text-bark text-sm leading-relaxed mb-3">
+            Give us a call at{" "}
+            <a href={`tel:${SITE.phoneE164}`} className="pointer-events-auto font-bold text-forest-green hover:text-ember-orange transition-colors whitespace-nowrap">{SITE.phone}</a>. We&apos;re happy to help.
           </p>
           <div className="bg-ember-orange/10 border border-ember-orange/20 rounded-xl px-4 py-3 mb-6">
-            <p className="font-body text-bark text-sm font-bold mb-0.5">Submit what you can — every bit helps.</p>
-            <p className="font-body text-muted text-xs leading-relaxed">Even partial information saves us all time. Fill in what you know and we&apos;ll follow up for anything else we need.</p>
+            <p className="font-body text-bark text-sm font-bold mb-0">Submit what you know, and we&apos;ll take it from there.</p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">
@@ -143,7 +154,7 @@ export function QuotePopup() {
               onClick={dismiss}
               className="flex-1 border border-line text-muted text-center px-5 py-3 rounded-xl font-body text-sm hover:border-bark hover:text-bark transition-colors"
             >
-              Dismiss
+              Browse Site for More Information
             </button>
           </div>
         </div>

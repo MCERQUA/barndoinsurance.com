@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { CheckCircle, ArrowLeft, Phone, ArrowRight } from "lucide-react";
+import { CheckCircle, ArrowLeft, Phone, ArrowRight, FileDown } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { SERVICES, SITE } from "@/lib/site";
+
+// Josh's Builders Risk Application (2026-10-08): served from public/forms/, offered only on the builders risk page.
+const BUILDERS_RISK_SLUG = "barndominium-builders-risk-insurance";
+const BUILDERS_RISK_PDF = "/forms/builders-risk-application.pdf";
 
 export async function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -183,6 +187,17 @@ export default async function ServicePage({
                     <Link href="/quote" className="block w-full bg-ember-orange text-white text-center px-5 py-3 rounded-lg font-body font-bold text-sm hover:bg-ember-orange-dark transition-colors mb-3">
                       Request a Free Quote
                     </Link>
+                    {service.slug === BUILDERS_RISK_SLUG && (
+                      <a
+                        href={BUILDERS_RISK_PDF}
+                        download
+                        aria-label="Download the Builders Risk Application (PDF)"
+                        className="flex w-full items-center justify-center gap-2 border-2 border-white text-white text-center px-5 py-3 rounded-lg font-body font-bold text-sm hover:bg-white hover:text-forest-green transition-colors"
+                      >
+                        <FileDown className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+                        Download the Builders Risk Application (PDF)
+                      </a>
+                    )}
                   </div>
                 </FadeIn>
 

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { CheckCircle, Mail, ArrowRight } from "lucide-react";
+import { CheckCircle, Mail, ArrowRight, Download } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { FadeIn } from "@/components/animations/FadeIn";
@@ -146,7 +146,16 @@ export default function HomeownersApplicationPage() {
                 know — you don&apos;t have to finish every field to send it, and we&apos;ll follow
                 up on anything missing.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                <a
+                  href="/forms/homeowners-application.pdf"
+                  download="homeowners-application.pdf"
+                  aria-label="Download the blank Homeowners Insurance Application (PDF)"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-forest-green px-6 py-3 font-body font-bold text-sm shadow-cta hover:bg-white/90 transition-colors"
+                >
+                  <Download className="w-4 h-4" />
+                  Download Blank Application (PDF)
+                </a>
                 <a
                   href={`mailto:${SITE.email}`}
                   className="inline-flex items-center gap-2 font-body text-sm text-white/90 hover:text-white transition-colors"

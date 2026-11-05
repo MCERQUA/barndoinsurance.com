@@ -15,6 +15,7 @@ export default function QuotePage() {
     name: "", company: "", email: "", phone: "",
     propertyAddress: "", city: "", zip: "", barndominium: "", squareFootage: "",
     yearBuilt: "", estimatedValue: "", farmOperations: "", state: "", message: "",
+    effective_date: "", current_carrier: "", losses_3yr_count: "", losses_3yr_details: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -171,6 +172,25 @@ export default function QuotePage() {
                               ))}
                             </select>
                           </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                          {field("effective_date", "Requested Coverage Start Date", "date", false)}
+                          {field("current_carrier", "Current or Most Recent Insurance Carrier", "text", false)}
+                          {field("losses_3yr_count", "Claims in the Last 3 Years", "number", false)}
+                        </div>
+
+                        <div>
+                          <label className="block font-body text-sm font-bold text-bark mb-1.5">
+                            Claim Details: Dates, What Happened, Amounts
+                          </label>
+                          <textarea
+                            name="losses_3yr_details"
+                            rows={3}
+                            value={formData.losses_3yr_details}
+                            onChange={(e) => setFormData({ ...formData, losses_3yr_details: e.target.value })}
+                            className="w-full px-4 py-2.5 border border-border rounded-lg font-body text-sm text-bark focus:outline-none focus:border-forest-green resize-none bg-white"
+                          />
                         </div>
 
                         <div>

@@ -22,6 +22,10 @@
   <textarea name="message"></textarea>
 <label>City: <input type="text" name="city" required /></label>
 <label>ZIP Code: <input type="text" name="zip" inputMode="numeric" pattern="[0-9]{5}(-[0-9]{4})?" required /></label>
+  <input type="date" name="effective_date" />
+  <input name="current_carrier" />
+  <input type="number" name="losses_3yr_count" />
+  <textarea name="losses_3yr_details"></textarea>
 </form>
 
 <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>

@@ -103,9 +103,26 @@ export default function QuotePage() {
                       <CheckCircle className="w-14 h-14 text-forest-green mx-auto mb-4" />
                       <h2 className="font-heading text-2xl text-bark font-bold mb-3">Quote Request Received!</h2>
                       <p className="font-body text-muted mb-2">We&apos;ll prepare your barndominium insurance quote and be in touch today.</p>
-                      <p className="font-body text-sm text-muted">
+                      <p className="font-body text-sm text-muted mb-6">
                         We&apos;ll be in touch shortly.
                       </p>
+                      <div className="rounded-xl border border-forest-green/30 bg-forest-green/5 p-6 text-left">
+                        <h3 className="font-heading text-lg text-bark font-bold mb-2">
+                          Want to speed up underwriting?
+                        </h3>
+                        <p className="font-body text-sm text-muted mb-4">
+                          This quick form gets us started, but a bindable barndominium/homeowners quote needs
+                          more detail than fits here — construction type, roof, occupancy, coverage amounts,
+                          and mortgagee info. Complete our full Homeowners Application now and we can skip a
+                          round of back-and-forth.
+                        </p>
+                        <Link
+                          href="/homeowners-application"
+                          className="inline-flex items-center gap-2 bg-ember-orange text-white px-5 py-3 rounded-lg font-body font-bold hover:bg-ember-orange-dark transition-colors"
+                        >
+                          Continue to Full Homeowners Application →
+                        </Link>
+                      </div>
                     </div>
                   ) : (
                     <div className="bg-white rounded-2xl border border-border p-8">

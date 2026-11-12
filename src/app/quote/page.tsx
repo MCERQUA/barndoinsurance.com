@@ -10,21 +10,47 @@ import { SITE } from "@/lib/site";
 
 const STATE_OPTIONS: [string, string][] = [["AL", "Alabama"], ["AK", "Alaska"], ["AZ", "Arizona"], ["AR", "Arkansas"], ["CA", "California"], ["CO", "Colorado"], ["CT", "Connecticut"], ["DE", "Delaware"], ["DC", "District of Columbia"], ["FL", "Florida"], ["GA", "Georgia"], ["HI", "Hawaii"], ["ID", "Idaho"], ["IL", "Illinois"], ["IN", "Indiana"], ["IA", "Iowa"], ["KS", "Kansas"], ["KY", "Kentucky"], ["LA", "Louisiana"], ["ME", "Maine"], ["MD", "Maryland"], ["MA", "Massachusetts"], ["MI", "Michigan"], ["MN", "Minnesota"], ["MS", "Mississippi"], ["MO", "Missouri"], ["MT", "Montana"], ["NE", "Nebraska"], ["NV", "Nevada"], ["NH", "New Hampshire"], ["NJ", "New Jersey"], ["NM", "New Mexico"], ["NY", "New York"], ["NC", "North Carolina"], ["ND", "North Dakota"], ["OH", "Ohio"], ["OK", "Oklahoma"], ["OR", "Oregon"], ["PA", "Pennsylvania"], ["RI", "Rhode Island"], ["SC", "South Carolina"], ["SD", "South Dakota"], ["TN", "Tennessee"], ["TX", "Texas"], ["UT", "Utah"], ["VT", "Vermont"], ["VA", "Virginia"], ["WA", "Washington"], ["WV", "West Virginia"], ["WI", "Wisconsin"], ["WY", "Wyoming"]];
 
+const REQUIRED_FIELDS: { key: string; label: string }[] = [
+  { key: "name", label: "Full Name" },
+  { key: "email", label: "Email Address" },
+  { key: "phone", label: "Phone Number" },
+  { key: "propertyAddress", label: "Property Address" },
+  { key: "city", label: "City" },
+  { key: "zip", label: "ZIP Code" },
+  { key: "barndominium", label: "Property Type" },
+  { key: "squareFootage", label: "Square Footage" },
+  { key: "estimatedValue", label: "Estimated Replacement Value" },
+  { key: "farmOperations", label: "Farm / Ranch Operations on Site?" },
+  { key: "state", label: "State" },
+  { key: "currentlyInsured", label: "Currently Insured?" },
+];
+
 export default function QuotePage() {
   const [formData, setFormData] = useState({
     name: "", company: "", email: "", phone: "",
     propertyAddress: "", city: "", zip: "", barndominium: "", squareFootage: "",
-    yearBuilt: "", estimatedValue: "", farmOperations: "", state: "", message: "",
-    effective_date: "", current_carrier: "", losses_3yr_count: "", losses_3yr_details: "",
+    yearBuilt: "", estimatedValue: "", farmOperations: "", state: "", notes: "",
+    currentlyInsured: "", desiredEffectiveDate: "", currentCarrier: "", lossCount: "", lossDescription: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
     setError(false);
+    setValidationError(null);
+
+    const missing = REQUIRED_FIELDS.filter(
+      ({ key }) => !String(formData[key as keyof typeof formData] ?? "").trim()
+    ).map(({ label }) => label);
+    if (missing.length > 0) {
+      setValidationError(`Please fill out: ${missing.join(", ")}`);
+      return;
+    }
+
+    setLoading(true);
     try {
       const form = e.currentTarget;
       const data = new FormData(form);
@@ -192,9 +218,10 @@ export default function QuotePage() {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                          {field("effective_date", "Requested Coverage Start Date", "date", false)}
-                          {field("current_carrier", "Current or Most Recent Insurance Carrier", "text", false)}
-                          {field("losses_3yr_count", "Claims in the Last 3 Years", "number", false)}
+                          {select("currentlyInsured", "Currently Insured?", ["Yes", "No"])}
+                          {field("desiredEffectiveDate", "Requested Coverage Start Date", "date", false)}
+                          {field("currentCarrier", "Current or Most Recent Insurance Carrier", "text", false)}
+                          {field("lossCount", "Claims in the Last 3 Years", "number", false)}
                         </div>
 
                         <div>
@@ -202,10 +229,10 @@ export default function QuotePage() {
                             Claim Details: Dates, What Happened, Amounts
                           </label>
                           <textarea
-                            name="losses_3yr_details"
+                            name="lossDescription"
                             rows={3}
-                            value={formData.losses_3yr_details}
-                            onChange={(e) => setFormData({ ...formData, losses_3yr_details: e.target.value })}
+                            value={formData.lossDescription}
+                            onChange={(e) => setFormData({ ...formData, lossDescription: e.target.value })}
                             className="w-full px-4 py-2.5 border border-border rounded-lg font-body text-sm text-bark focus:outline-none focus:border-forest-green resize-none bg-white"
                           />
                         </div>
@@ -215,14 +242,22 @@ export default function QuotePage() {
                             Additional Notes
                           </label>
                           <textarea
-                            name="message"
+                            name="notes"
                             rows={3}
-                            value={formData.message}
-                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                            value={formData.notes}
+                            onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                             placeholder="Still building (need builders risk)? Attached shop or outbuildings? Coverage questions..."
                             className="w-full px-4 py-2.5 border border-border rounded-lg font-body text-sm text-bark focus:outline-none focus:border-forest-green resize-none bg-white"
                           />
                         </div>
+
+                        {validationError && (
+                          <div className="rounded-lg border border-ember-orange/40 bg-ember-orange/10 px-4 py-3">
+                            <p className="font-body text-sm font-bold text-ember-orange">
+                              {validationError}
+                            </p>
+                          </div>
+                        )}
 
                         {error && (
                           <div className="rounded-lg border border-ember-orange/40 bg-ember-orange/10 px-4 py-3">

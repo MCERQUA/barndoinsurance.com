@@ -25,3 +25,17 @@
   event = "submission_created"
   url = "https://josh.jam-bot.com/social-api/api/leads/webhook/netlify?tenant=josh&site=barndoinsurance.com"
   form = "homeowners-application"
+
+# /homeowners-application retired (host ruling 2026-11-17): the complete quote form at /quote replaces it.
+# force = true because the exported page file would otherwise shadow the redirect. Page file kept in the repo.
+[[redirects]]
+  from = "/homeowners-application"
+  to = "/quote"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/homeowners-application/"
+  to = "/quote"
+  status = 301
+  force = true

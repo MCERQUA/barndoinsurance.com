@@ -3,30 +3,363 @@
   Served at /__forms.html. The real forms live inside Next.js React client
   components which Netlify's crawler cannot parse, so these plain-HTML stubs
   register the forms (+ their named fields) at build time. Field names MUST
-  match the live forms in src/app/quote/page.tsx + contact/page.tsx.
+  match the live forms in src/components/forms/quote-fields.ts (quote) + contact/page.tsx.
 -->
 <form name="quote" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
   <input type="hidden" name="form-name" value="quote" />
   <p hidden><label>Don't fill this out: <input name="bot-field" /></label></p>
-  <input name="name" />
-  <input name="company" />
-  <input name="email" />
-  <input name="phone" />
-  <input name="propertyAddress" />
-  <input name="barndominium" />
-  <input name="squareFootage" />
-  <input name="yearBuilt" />
-  <input name="estimatedValue" />
-  <input name="farmOperations" />
-  <select name="state" required><option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="DC">District of Columbia</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option></select>
-  <textarea name="notes"></textarea>
-<label>City: <input type="text" name="city" required /></label>
-<label>ZIP Code: <input type="text" name="zip" inputMode="numeric" pattern="[0-9]{5}(-[0-9]{4})?" required /></label>
-  <select name="currentlyInsured" required><option value="Yes">Yes</option><option value="No">No</option></select>
+  <input type="text" name="lossDescription" />
+  <input type="text" name="name" />
+  <input type="date" name="dateOfBirth" />
+  <select name="maritalStatus"><option value="Married">Married</option><option value="Single">Single</option><option value="Divorced">Divorced</option><option value="Widowed">Widowed</option><option value="Separated">Separated</option><option value="Domestic partner">Domestic partner</option></select>
+  <input type="text" name="email" />
+  <input type="text" name="phone" />
+  <input type="text" name="alternatePhone" />
+  <input type="text" name="applicantOccupation" />
+  <input type="text" name="applicantEmployer" />
+  <input type="text" name="applicantYearsEmployed" />
+  <input type="text" name="driverLicenseNumber" />
+  <select name="driverLicenseState"><option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="DE">DE</option><option value="DC">DC</option><option value="FL">FL</option><option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option><option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option><option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option></select>
+  <input type="radio" name="hasCoApplicant" value="Yes" />
+  <input type="radio" name="hasCoApplicant" value="No" />
+  <input type="text" name="coApplicantName" />
+  <input type="date" name="coApplicantDateOfBirth" />
+  <select name="coApplicantMaritalStatus"><option value="Married">Married</option><option value="Single">Single</option><option value="Divorced">Divorced</option><option value="Widowed">Widowed</option><option value="Separated">Separated</option><option value="Domestic partner">Domestic partner</option></select>
+  <input type="text" name="coApplicantOccupation" />
+  <input type="text" name="coApplicantEmployer" />
+  <input type="text" name="coApplicantYearsEmployed" />
+  <input type="text" name="propertyAddress" />
+  <input type="text" name="city" />
+  <select name="state"><option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="DE">DE</option><option value="DC">DC</option><option value="FL">FL</option><option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option><option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option><option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option></select>
+  <input type="text" name="zip" />
+  <input type="text" name="county" />
+  <input type="radio" name="mailingAddressSameAsProperty" value="Yes" />
+  <input type="radio" name="mailingAddressSameAsProperty" value="No" />
+  <input type="text" name="mailingStreetAddress" />
+  <input type="text" name="mailingCity" />
+  <select name="mailingState"><option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="DE">DE</option><option value="DC">DC</option><option value="FL">FL</option><option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option><option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option><option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option></select>
+  <input type="text" name="mailingZip" />
   <input type="date" name="desiredEffectiveDate" />
-  <input name="currentCarrier" />
-  <input type="number" name="lossCount" />
-  <textarea name="lossDescription"></textarea>
+  <select name="reasonForShopping"><option value="Lower price">Lower price</option><option value="Rate increase at renewal">Rate increase at renewal</option><option value="Better coverage">Better coverage</option><option value="New home purchase">New home purchase</option><option value="Carrier non-renewed me">Carrier non-renewed me</option><option value="Carrier cancelled me">Carrier cancelled me</option><option value="Unhappy with service">Unhappy with service</option><option value="Other">Other</option></select>
+  <input type="text" name="reasonForShoppingOther" />
+  <input type="radio" name="currentlyInsured" value="Yes" />
+  <input type="radio" name="currentlyInsured" value="No" />
+  <input type="text" name="currentCarrier" />
+  <input type="text" name="currentAnnualPremium" />
+  <input type="text" name="yearsWithCurrentCarrier" />
+  <input type="text" name="namedOwners" />
+  <input type="text" name="company" />
+  <input type="date" name="purchaseDate" />
+  <input type="text" name="purchasePrice" />
+  <input type="text" name="estimatedMarketValue" />
+  <input type="text" name="estimatedValue" />
+  <input type="radio" name="purchaseStatus" value="New purchase" />
+  <input type="radio" name="purchaseStatus" value="Existing residence" />
+  <input type="radio" name="occupancyStatus" value="Primary residence" />
+  <input type="radio" name="occupancyStatus" value="Secondary residence" />
+  <input type="radio" name="occupancyStatus" value="Seasonal residence" />
+  <input type="radio" name="occupancyStatus" value="Tenant occupied" />
+  <input type="radio" name="occupancyStatus" value="Vacant" />
+  <input type="date" name="dateOccupied" />
+  <input type="radio" name="underRenovation" value="Yes" />
+  <input type="radio" name="underRenovation" value="No" />
+  <input type="radio" name="shortTermRental" value="Yes" />
+  <input type="radio" name="shortTermRental" value="No" />
+  <input type="text" name="numberOfFamilies" />
+  <input type="text" name="numberOfResidents" />
+  <input type="text" name="monthsOccupiedPerYear" />
+  <input type="text" name="adultsInHousehold" />
+  <input type="text" name="childrenInHousehold" />
+  <input type="text" name="unrelatedResidents" />
+  <input type="text" name="domesticEmployees" />
+  <input type="radio" name="homeBasedBusiness" value="Yes" />
+  <input type="radio" name="homeBasedBusiness" value="No" />
+  <input type="radio" name="customersOrEmployeesVisit" value="Yes" />
+  <input type="radio" name="customersOrEmployeesVisit" value="No" />
+  <input type="radio" name="roomRentedToOthers" value="Yes" />
+  <input type="radio" name="roomRentedToOthers" value="No" />
+  <input type="radio" name="shortTermRentalActivity" value="Yes" />
+  <input type="radio" name="shortTermRentalActivity" value="No" />
+  <textarea name="occupancyExposureExplanation"></textarea>
+  <input type="text" name="priorAddress" />
+  <input type="text" name="priorCity" />
+  <select name="priorState"><option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="DE">DE</option><option value="DC">DC</option><option value="FL">FL</option><option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option><option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option><option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option></select>
+  <input type="text" name="priorZip" />
+  <input type="text" name="yearsAtPriorAddress" />
+  <select name="priorResidenceType"><option value="Owned home">Owned home</option><option value="Rented house">Rented house</option><option value="Rented apartment">Rented apartment</option><option value="Lived with family">Lived with family</option><option value="Other">Other</option></select>
+  <input type="text" name="priorInsuranceCarrier" />
+  <select name="barndominium"><option value="Barndominium (steel frame / metal siding)">Barndominium (steel frame / metal siding)</option><option value="Pole-barn / post-frame home">Pole-barn / post-frame home</option><option value="Metal building home">Metal building home</option><option value="Barndo + shop / workshop">Barndo + shop / workshop</option><option value="Not sure">Not sure</option></select>
+  <input type="text" name="yearBuilt" />
+  <input type="text" name="squareFootage" />
+  <input type="text" name="numberOfStories" />
+  <input type="text" name="numberOfUnits" />
+  <select name="constructionType"><option value="Frame (wood)">Frame (wood)</option><option value="Steel / metal frame">Steel / metal frame</option><option value="Post-frame / pole barn">Post-frame / pole barn</option><option value="Masonry">Masonry</option><option value="Masonry veneer">Masonry veneer</option><option value="Log">Log</option><option value="Concrete / ICF">Concrete / ICF</option><option value="Other">Other</option></select>
+  <select name="exteriorWallMaterial"><option value="Metal siding">Metal siding</option><option value="Stucco">Stucco</option><option value="Brick">Brick</option><option value="Stone">Stone</option><option value="Vinyl siding">Vinyl siding</option><option value="Wood siding">Wood siding</option><option value="Fiber cement">Fiber cement</option><option value="Block / CMU">Block / CMU</option><option value="Other">Other</option></select>
+  <select name="foundationType"><option value="Slab on grade">Slab on grade</option><option value="Crawlspace">Crawlspace</option><option value="Full basement">Full basement</option><option value="Partial basement">Partial basement</option><option value="Pier and beam">Pier and beam</option><option value="Other">Other</option></select>
+  <select name="roofShape"><option value="Gable">Gable</option><option value="Hip">Hip</option><option value="Flat">Flat</option><option value="Shed">Shed</option><option value="Gambrel">Gambrel</option><option value="Other">Other</option></select>
+  <select name="roofMaterial"><option value="Metal (standing seam)">Metal (standing seam)</option><option value="Metal (corrugated / R-panel)">Metal (corrugated / R-panel)</option><option value="Asphalt shingle">Asphalt shingle</option><option value="Concrete / clay tile">Concrete / clay tile</option><option value="Slate">Slate</option><option value="Wood shake">Wood shake</option><option value="Membrane / flat roof">Membrane / flat roof</option><option value="Other">Other</option></select>
+  <input type="text" name="roofYear" />
+  <select name="roofCondition"><option value="Excellent">Excellent</option><option value="Good">Good</option><option value="Fair">Fair</option><option value="Poor">Poor</option></select>
+  <input type="radio" name="roofReplaced" value="Yes" />
+  <input type="radio" name="roofReplaced" value="No" />
+  <input type="text" name="roofReplacementCost" />
+  <input type="date" name="roofPermitDate" />
+  <input type="text" name="bedrooms" />
+  <input type="text" name="bathrooms" />
+  <input type="text" name="garageSpaces" />
+  <select name="garageType"><option value="None">None</option><option value="Attached">Attached</option><option value="Detached">Detached</option><option value="Built-in / basement">Built-in / basement</option><option value="Carport only">Carport only</option></select>
+  <input type="text" name="basementSqFt" />
+  <input type="text" name="finishedBasementSqFt" />
+  <input type="text" name="porchDeckSqFt" />
+  <input type="text" name="carportSqFt" />
+  <input type="text" name="otherAttachedArea" />
+  <input type="text" name="flooringTypes" />
+  <select name="kitchenQuality"><option value="Builder grade">Builder grade</option><option value="Standard">Standard</option><option value="Upgraded">Upgraded</option><option value="Custom / luxury">Custom / luxury</option></select>
+  <select name="bathroomQuality"><option value="Builder grade">Builder grade</option><option value="Standard">Standard</option><option value="Upgraded">Upgraded</option><option value="Custom / luxury">Custom / luxury</option></select>
+  <input type="text" name="customFeatures" />
+  <select name="solarPanels"><option value="None">None</option><option value="Owned">Owned</option><option value="Leased">Leased</option></select>
+  <input type="radio" name="hasDetachedStructures" value="Yes" />
+  <input type="radio" name="hasDetachedStructures" value="No" />
+  <input type="text" name="otherStructureType" />
+  <input type="text" name="otherStructureValue" />
+  <input type="text" name="detachedGarageShopSqFt" />
+  <input type="text" name="guestHouseSqFt" />
+  <input type="text" name="fenceTypeLength" />
+  <input type="radio" name="historicHome" value="Yes" />
+  <input type="radio" name="historicHome" value="No" />
+  <input type="radio" name="logHome" value="Yes" />
+  <input type="radio" name="logHome" value="No" />
+  <input type="radio" name="manufacturedHome" value="Yes" />
+  <input type="radio" name="manufacturedHome" value="No" />
+  <input type="radio" name="modularHome" value="Yes" />
+  <input type="radio" name="modularHome" value="No" />
+  <input type="radio" name="earthSheltered" value="Yes" />
+  <input type="radio" name="earthSheltered" value="No" />
+  <input type="radio" name="eifsSyntheticStucco" value="Yes" />
+  <input type="radio" name="eifsSyntheticStucco" value="No" />
+  <input type="radio" name="flatRoof" value="Yes" />
+  <input type="radio" name="flatRoof" value="No" />
+  <input type="radio" name="woodShakeRoof" value="Yes" />
+  <input type="radio" name="woodShakeRoof" value="No" />
+  <input type="radio" name="unreinforcedMasonry" value="Yes" />
+  <input type="radio" name="unreinforcedMasonry" value="No" />
+  <input type="radio" name="hasAdditionsRenovations" value="Yes" />
+  <input type="radio" name="hasAdditionsRenovations" value="No" />
+  <textarea name="additionsRenovationsDescription"></textarea>
+  <input type="text" name="electricalServiceAmps" />
+  <select name="wiringType"><option value="Copper">Copper</option><option value="Aluminum">Aluminum</option><option value="Knob-and-tube">Knob-and-tube</option><option value="Cloth-sheathed">Cloth-sheathed</option><option value="Other">Other</option></select>
+  <input type="text" name="electricalUpdateYear" />
+  <input type="text" name="generatorTypeSize" />
+  <select name="plumbingType"><option value="Copper">Copper</option><option value="PEX">PEX</option><option value="CPVC">CPVC</option><option value="PVC">PVC</option><option value="Galvanized steel">Galvanized steel</option><option value="Polybutylene">Polybutylene</option><option value="Lead">Lead</option><option value="Other">Other</option></select>
+  <input type="text" name="plumbingUpdateYear" />
+  <select name="waterHeaterType"><option value="Gas tank">Gas tank</option><option value="Electric tank">Electric tank</option><option value="Tankless gas">Tankless gas</option><option value="Tankless electric">Tankless electric</option><option value="Heat pump">Heat pump</option><option value="Solar">Solar</option></select>
+  <input type="text" name="waterHeaterAgeYears" />
+  <select name="sewerSeptic"><option value="Public sewer">Public sewer</option><option value="Septic system">Septic system</option></select>
+  <input type="text" name="septicAge" />
+  <select name="primaryHeatType"><option value="Gas forced air">Gas forced air</option><option value="Electric forced air">Electric forced air</option><option value="Heat pump">Heat pump</option><option value="Electric baseboard">Electric baseboard</option><option value="Propane furnace">Propane furnace</option><option value="Oil furnace">Oil furnace</option><option value="Wood stove">Wood stove</option><option value="Radiant / hydronic">Radiant / hydronic</option><option value="Mini-split">Mini-split</option><option value="Other">Other</option></select>
+  <input type="text" name="heatingUpdateYear" />
+  <select name="centralAcType"><option value="Central air">Central air</option><option value="Heat pump">Heat pump</option><option value="Mini-split">Mini-split</option><option value="Evaporative cooler">Evaporative cooler</option><option value="Window units">Window units</option><option value="None">None</option></select>
+  <input type="text" name="centralAcAgeYears" />
+  <input type="text" name="secondaryHeatSource" />
+  <select name="publicPrivateWater"><option value="Public">Public</option><option value="Private well">Private well</option></select>
+  <input type="text" name="wellDepthAge" />
+  <input type="text" name="fuelTankLocationSize" />
+  <input type="text" name="gasProvider" />
+  <input type="text" name="propaneProvider" />
+  <input type="text" name="oilTankAge" />
+  <input type="text" name="waterShutoffDevice" />
+  <input type="radio" name="centralBurglarAlarm" value="Yes" />
+  <input type="radio" name="centralBurglarAlarm" value="No" />
+  <input type="radio" name="centralFireAlarm" value="Yes" />
+  <input type="radio" name="centralFireAlarm" value="No" />
+  <input type="radio" name="localAlarmOnly" value="Yes" />
+  <input type="radio" name="localAlarmOnly" value="No" />
+  <input type="radio" name="smokeDetectors" value="Yes" />
+  <input type="radio" name="smokeDetectors" value="No" />
+  <input type="radio" name="carbonMonoxideDetectors" value="Yes" />
+  <input type="radio" name="carbonMonoxideDetectors" value="No" />
+  <input type="radio" name="fireExtinguishers" value="Yes" />
+  <input type="radio" name="fireExtinguishers" value="No" />
+  <input type="radio" name="sprinklerSystem" value="Yes" />
+  <input type="radio" name="sprinklerSystem" value="No" />
+  <input type="radio" name="deadboltLocks" value="Yes" />
+  <input type="radio" name="deadboltLocks" value="No" />
+  <input type="radio" name="gatedCommunity" value="Yes" />
+  <input type="radio" name="gatedCommunity" value="No" />
+  <input type="radio" name="securityCameras" value="Yes" />
+  <input type="radio" name="securityCameras" value="No" />
+  <input type="radio" name="leakDetection" value="Yes" />
+  <input type="radio" name="leakDetection" value="No" />
+  <input type="text" name="distanceToFireHydrantFeet" />
+  <input type="text" name="distanceToFireStationMiles" />
+  <select name="fireDepartmentType"><option value="Paid / career">Paid / career</option><option value="Volunteer">Volunteer</option><option value="Combination">Combination</option><option value="None / unprotected">None / unprotected</option></select>
+  <input type="radio" name="knobAndTubeWiring" value="Yes" />
+  <input type="radio" name="knobAndTubeWiring" value="No" />
+  <input type="radio" name="badPlumbing" value="Yes" />
+  <input type="radio" name="badPlumbing" value="No" />
+  <input type="radio" name="activeLeaksOrDamage" value="Yes" />
+  <input type="radio" name="activeLeaksOrDamage" value="No" />
+  <input type="radio" name="openPermitsOrViolations" value="Yes" />
+  <input type="radio" name="openPermitsOrViolations" value="No" />
+  <textarea name="systemsConditionExplanation"></textarea>
+  <input type="text" name="numberOfDogs" />
+  <input type="text" name="dogBreeds" />
+  <input type="text" name="numberOfOtherAnimals" />
+  <input type="text" name="otherAnimalTypes" />
+  <select name="farmOperations"><option value="None — residence only">None — residence only</option><option value="Small hobby farm">Small hobby farm</option><option value="Working farm / ranch">Working farm / ranch</option><option value="Agricultural income">Agricultural income</option></select>
+  <input type="radio" name="biteOrAttackHistory" value="Yes" />
+  <input type="radio" name="biteOrAttackHistory" value="No" />
+  <input type="text" name="biteOrAttackDetails" />
+  <input type="radio" name="livestockOrFarmAnimals" value="Yes" />
+  <input type="radio" name="livestockOrFarmAnimals" value="No" />
+  <input type="radio" name="swimmingPool" value="Yes" />
+  <input type="radio" name="swimmingPool" value="No" />
+  <input type="radio" name="spaHotTub" value="Yes" />
+  <input type="radio" name="spaHotTub" value="No" />
+  <input type="radio" name="divingBoard" value="Yes" />
+  <input type="radio" name="divingBoard" value="No" />
+  <input type="radio" name="slide" value="Yes" />
+  <input type="radio" name="slide" value="No" />
+  <input type="radio" name="poolFenced" value="Yes" />
+  <input type="radio" name="poolFenced" value="No" />
+  <input type="radio" name="trampoline" value="Yes" />
+  <input type="radio" name="trampoline" value="No" />
+  <input type="radio" name="treehouse" value="Yes" />
+  <input type="radio" name="treehouse" value="No" />
+  <input type="radio" name="playStructure" value="Yes" />
+  <input type="radio" name="playStructure" value="No" />
+  <input type="radio" name="zipLine" value="Yes" />
+  <input type="radio" name="zipLine" value="No" />
+  <input type="radio" name="skateRamp" value="Yes" />
+  <input type="radio" name="skateRamp" value="No" />
+  <input type="radio" name="pondOrLake" value="Yes" />
+  <input type="radio" name="pondOrLake" value="No" />
+  <input type="radio" name="dock" value="Yes" />
+  <input type="radio" name="dock" value="No" />
+  <input type="radio" name="boatLift" value="Yes" />
+  <input type="radio" name="boatLift" value="No" />
+  <input type="radio" name="atvDirtBikeUse" value="Yes" />
+  <input type="radio" name="atvDirtBikeUse" value="No" />
+  <input type="radio" name="shootingRange" value="Yes" />
+  <input type="radio" name="shootingRange" value="No" />
+  <input type="text" name="poolTypeYear" />
+  <input type="text" name="fenceHeightGateType" />
+  <input type="text" name="waterFeatureDetails" />
+  <input type="radio" name="firearmsOnPremises" value="Yes" />
+  <input type="radio" name="firearmsOnPremises" value="No" />
+  <input type="radio" name="solidFuelAppliance" value="Yes" />
+  <input type="radio" name="solidFuelAppliance" value="No" />
+  <input type="radio" name="steepTerrainOrCliff" value="Yes" />
+  <input type="radio" name="steepTerrainOrCliff" value="No" />
+  <input type="radio" name="priorForeclosureBankruptcyCancellation" value="Yes" />
+  <input type="radio" name="priorForeclosureBankruptcyCancellation" value="No" />
+  <input type="radio" name="felonyOrFraudResident" value="Yes" />
+  <input type="radio" name="felonyOrFraudResident" value="No" />
+  <textarea name="hazardsExplanation"></textarea>
+  <input type="text" name="numberOfVehiclesGaraged" />
+  <select name="rvBoatStored"><option value="None">None</option><option value="RV">RV</option><option value="Boat">Boat</option><option value="RV and boat">RV and boat</option></select>
+  <select name="commercialVehicleUse"><option value="None">None</option><option value="Work truck or van">Work truck or van</option><option value="Heavy commercial vehicle">Heavy commercial vehicle</option></select>
+  <input type="text" name="coverageADwelling" />
+  <input type="text" name="coverageBOtherStructures" />
+  <input type="text" name="coverageCPersonalProperty" />
+  <input type="text" name="coverageDLossOfUse" />
+  <input type="text" name="coverageEPersonalLiability" />
+  <input type="text" name="coverageFMedicalPayments" />
+  <input type="text" name="allOtherPerilsDeductible" />
+  <input type="text" name="windHailDeductible" />
+  <input type="text" name="namedStormDeductible" />
+  <input type="text" name="estimatedPersonalPropertyValue" />
+  <input type="text" name="estimatedAdditionalLivingExpense" />
+  <input type="radio" name="replacementCostOnContents" value="Yes" />
+  <input type="radio" name="replacementCostOnContents" value="No" />
+  <input type="radio" name="extendedDwellingReplacement" value="Yes" />
+  <input type="radio" name="extendedDwellingReplacement" value="No" />
+  <input type="radio" name="guaranteedReplacementCost" value="Yes" />
+  <input type="radio" name="guaranteedReplacementCost" value="No" />
+  <input type="radio" name="waterBackup" value="Yes" />
+  <input type="radio" name="waterBackup" value="No" />
+  <input type="radio" name="serviceLine" value="Yes" />
+  <input type="radio" name="serviceLine" value="No" />
+  <input type="radio" name="equipmentBreakdown" value="Yes" />
+  <input type="radio" name="equipmentBreakdown" value="No" />
+  <input type="radio" name="ordinanceOrLaw" value="Yes" />
+  <input type="radio" name="ordinanceOrLaw" value="No" />
+  <input type="radio" name="identityTheft" value="Yes" />
+  <input type="radio" name="identityTheft" value="No" />
+  <input type="radio" name="homeSystems" value="Yes" />
+  <input type="radio" name="homeSystems" value="No" />
+  <input type="radio" name="scheduledProperty" value="Yes" />
+  <input type="radio" name="scheduledProperty" value="No" />
+  <input type="radio" name="homeCyber" value="Yes" />
+  <input type="radio" name="homeCyber" value="No" />
+  <input type="radio" name="earthquake" value="Yes" />
+  <input type="radio" name="earthquake" value="No" />
+  <input type="radio" name="floodQuoteRequested" value="Yes" />
+  <input type="radio" name="floodQuoteRequested" value="No" />
+  <input type="radio" name="personalInjury" value="Yes" />
+  <input type="radio" name="personalInjury" value="No" />
+  <input type="radio" name="umbrellaQuote" value="Yes" />
+  <input type="radio" name="umbrellaQuote" value="No" />
+  <input type="text" name="jewelryValue" />
+  <input type="text" name="fineArtsValue" />
+  <input type="text" name="firearmsValue" />
+  <input type="text" name="collectiblesValue" />
+  <input type="text" name="musicalInstrumentsValue" />
+  <input type="text" name="otherScheduledValue" />
+  <textarea name="scheduledPropertyList"></textarea>
+  <input type="radio" name="hasLossesLast5Years" value="Yes" />
+  <input type="radio" name="hasLossesLast5Years" value="No" />
+  <input type="text" name="lossCount" />
+  <input type="date" name="loss1Date" />
+  <input type="text" name="loss1Location" />
+  <input type="text" name="loss1Type" />
+  <input type="text" name="loss1Amount" />
+  <select name="loss1Status"><option value="Open">Open</option><option value="Closed">Closed</option></select>
+  <input type="text" name="loss1ClaimNumber" />
+  <input type="date" name="loss2Date" />
+  <input type="text" name="loss2Location" />
+  <input type="text" name="loss2Type" />
+  <input type="text" name="loss2Amount" />
+  <select name="loss2Status"><option value="Open">Open</option><option value="Closed">Closed</option></select>
+  <input type="text" name="loss2ClaimNumber" />
+  <input type="date" name="loss3Date" />
+  <input type="text" name="loss3Location" />
+  <input type="text" name="loss3Type" />
+  <input type="text" name="loss3Amount" />
+  <select name="loss3Status"><option value="Open">Open</option><option value="Closed">Closed</option></select>
+  <input type="text" name="loss3ClaimNumber" />
+  <input type="date" name="loss4Date" />
+  <input type="text" name="loss4Location" />
+  <input type="text" name="loss4Type" />
+  <input type="text" name="loss4Amount" />
+  <select name="loss4Status"><option value="Open">Open</option><option value="Closed">Closed</option></select>
+  <input type="text" name="loss4ClaimNumber" />
+  <input type="radio" name="hasMortgage" value="Yes" />
+  <input type="radio" name="hasMortgage" value="No" />
+  <input type="text" name="mortgageCompany" />
+  <input type="text" name="mortgageLoanNumber" />
+  <input type="text" name="mortgageeAddress" />
+  <input type="text" name="mortgageeCity" />
+  <select name="mortgageeState"><option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="DE">DE</option><option value="DC">DC</option><option value="FL">FL</option><option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option><option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option><option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option></select>
+  <input type="text" name="mortgageeZip" />
+  <input type="radio" name="emailDocuments" value="Yes" />
+  <input type="radio" name="emailDocuments" value="No" />
+  <input type="radio" name="mailDocuments" value="Yes" />
+  <input type="radio" name="mailDocuments" value="No" />
+  <input type="radio" name="textNotifications" value="Yes" />
+  <input type="radio" name="textNotifications" value="No" />
+  <input type="radio" name="esignDocuments" value="Yes" />
+  <input type="radio" name="esignDocuments" value="No" />
+  <input type="radio" name="priorDeclarationsAvailable" value="Yes" />
+  <input type="radio" name="priorDeclarationsAvailable" value="No" />
+  <input type="radio" name="lossRunsAvailable" value="Yes" />
+  <input type="radio" name="lossRunsAvailable" value="No" />
+  <input type="radio" name="inspectionAvailable" value="Yes" />
+  <input type="radio" name="inspectionAvailable" value="No" />
+  <input type="radio" name="photosAvailable" value="Yes" />
+  <input type="radio" name="photosAvailable" value="No" />
+  <textarea name="notes"></textarea>
+  <input type="checkbox" name="applicantAttestation" value="Yes" />
 </form>
 
 <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>

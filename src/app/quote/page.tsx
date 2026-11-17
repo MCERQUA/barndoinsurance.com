@@ -1,107 +1,12 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Phone } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { SITE } from "@/lib/site";
-
-const STATE_OPTIONS: [string, string][] = [["AL", "Alabama"], ["AK", "Alaska"], ["AZ", "Arizona"], ["AR", "Arkansas"], ["CA", "California"], ["CO", "Colorado"], ["CT", "Connecticut"], ["DE", "Delaware"], ["DC", "District of Columbia"], ["FL", "Florida"], ["GA", "Georgia"], ["HI", "Hawaii"], ["ID", "Idaho"], ["IL", "Illinois"], ["IN", "Indiana"], ["IA", "Iowa"], ["KS", "Kansas"], ["KY", "Kentucky"], ["LA", "Louisiana"], ["ME", "Maine"], ["MD", "Maryland"], ["MA", "Massachusetts"], ["MI", "Michigan"], ["MN", "Minnesota"], ["MS", "Mississippi"], ["MO", "Missouri"], ["MT", "Montana"], ["NE", "Nebraska"], ["NV", "Nevada"], ["NH", "New Hampshire"], ["NJ", "New Jersey"], ["NM", "New Mexico"], ["NY", "New York"], ["NC", "North Carolina"], ["ND", "North Dakota"], ["OH", "Ohio"], ["OK", "Oklahoma"], ["OR", "Oregon"], ["PA", "Pennsylvania"], ["RI", "Rhode Island"], ["SC", "South Carolina"], ["SD", "South Dakota"], ["TN", "Tennessee"], ["TX", "Texas"], ["UT", "Utah"], ["VT", "Vermont"], ["VA", "Virginia"], ["WA", "Washington"], ["WV", "West Virginia"], ["WI", "Wisconsin"], ["WY", "Wyoming"]];
-
-const REQUIRED_FIELDS: { key: string; label: string }[] = [
-  { key: "name", label: "Full Name" },
-  { key: "email", label: "Email Address" },
-  { key: "phone", label: "Phone Number" },
-  { key: "propertyAddress", label: "Property Address" },
-  { key: "city", label: "City" },
-  { key: "zip", label: "ZIP Code" },
-  { key: "barndominium", label: "Property Type" },
-  { key: "squareFootage", label: "Square Footage" },
-  { key: "estimatedValue", label: "Estimated Replacement Value" },
-  { key: "farmOperations", label: "Farm / Ranch Operations on Site?" },
-  { key: "state", label: "State" },
-  { key: "currentlyInsured", label: "Currently Insured?" },
-];
+import { QuoteForm } from "@/components/forms/QuoteForm";
 
 export default function QuotePage() {
-  const [formData, setFormData] = useState({
-    name: "", company: "", email: "", phone: "",
-    propertyAddress: "", city: "", zip: "", barndominium: "", squareFootage: "",
-    yearBuilt: "", estimatedValue: "", farmOperations: "", state: "", notes: "",
-    currentlyInsured: "", desiredEffectiveDate: "", currentCarrier: "", lossCount: "", lossDescription: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [validationError, setValidationError] = useState<string | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(false);
-    setValidationError(null);
-
-    const missing = REQUIRED_FIELDS.filter(
-      ({ key }) => !String(formData[key as keyof typeof formData] ?? "").trim()
-    ).map(({ label }) => label);
-    if (missing.length > 0) {
-      setValidationError(`Please fill out: ${missing.join(", ")}`);
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const form = e.currentTarget;
-      const data = new FormData(form);
-      const res = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
-      });
-      if (!res.ok) throw new Error("submit failed");
-      setSubmitted(true);
-    } catch {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const field = (name: keyof typeof formData, label: string, type = "text", required = true) => (
-    <div key={name}>
-      <label className="block font-body text-sm font-bold text-bark mb-1.5">
-        {label}{required && <span className="text-ember-orange ml-1">*</span>}
-      </label>
-      <input
-        type={type}
-        name={name}
-        required={required}
-        value={formData[name]}
-        onChange={(e) => setFormData({ ...formData, [name]: e.target.value })}
-        className="w-full px-4 py-2.5 border border-border rounded-lg font-body text-sm text-bark focus:outline-none focus:border-forest-green bg-white"
-      />
-    </div>
-  );
-
-  const select = (name: keyof typeof formData, label: string, options: string[], required = true) => (
-    <div key={name}>
-      <label className="block font-body text-sm font-bold text-bark mb-1.5">
-        {label}{required && <span className="text-ember-orange ml-1">*</span>}
-      </label>
-      <select
-        name={name}
-        required={required}
-        value={formData[name]}
-        onChange={(e) => setFormData({ ...formData, [name]: e.target.value })}
-        className="w-full px-4 py-2.5 border border-border rounded-lg font-body text-sm text-bark focus:outline-none focus:border-forest-green bg-white"
-      >
-        <option value="">Select...</option>
-        {options.map((o) => <option key={o} value={o}>{o}</option>)}
-      </select>
-    </div>
-  );
-
   return (
     <>
       <Navbar />
@@ -124,173 +29,27 @@ export default function QuotePage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               <div className="lg:col-span-2">
                 <FadeIn>
-                  {submitted ? (
-                    <div className="bg-white rounded-2xl border border-border p-10 text-center">
-                      <CheckCircle className="w-14 h-14 text-forest-green mx-auto mb-4" />
-                      <h2 className="font-heading text-2xl text-bark font-bold mb-3">Quote Request Received!</h2>
-                      <p className="font-body text-muted mb-2">We&apos;ll prepare your barndominium insurance quote and be in touch today.</p>
-                      <p className="font-body text-sm text-muted mb-6">
-                        We&apos;ll be in touch shortly.
-                      </p>
-                      <div className="rounded-xl border border-forest-green/30 bg-forest-green/5 p-6 text-left">
-                        <h3 className="font-heading text-lg text-bark font-bold mb-2">
-                          Want to speed up underwriting?
-                        </h3>
-                        <p className="font-body text-sm text-muted mb-4">
-                          This quick form gets us started, but a bindable barndominium/homeowners quote needs
-                          more detail than fits here — construction type, roof, occupancy, coverage amounts,
-                          and mortgagee info. Complete our full Homeowners Application now and we can skip a
-                          round of back-and-forth.
-                        </p>
-                        <Link
-                          href="/homeowners-application"
-                          className="inline-flex items-center gap-2 bg-ember-orange text-white px-5 py-3 rounded-lg font-body font-bold hover:bg-ember-orange-dark transition-colors"
-                        >
-                          Continue to Full Homeowners Application →
-                        </Link>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="bg-white rounded-2xl border border-border p-8">
-                      <h2 className="font-heading text-2xl text-bark font-bold mb-6">
-                        {SITE.name} Quote Request
-                      </h2>
-                      <form
-                        name="quote"
-                        method="POST"
-                        data-netlify="true"
-                        data-netlify-honeypot="bot-field"
-                        onSubmit={handleSubmit}
-                        className="space-y-5"
-                      >
-                        <input type="hidden" name="form-name" value="quote" />
-                        <p hidden>
-                          <label>Don&apos;t fill this out: <input name="bot-field" /></label>
-                        </p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                          {field("name", "Full Name")}
-                          {field("company", "Company / Business Name", "text", false)}
-                          {field("email", "Email Address", "email")}
-                          {field("phone", "Phone Number", "tel")}
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                          {field("propertyAddress", "Property Address")}
-                          {field("city", "City")}
-                          {field("zip", "ZIP Code")}
-                          {select("barndominium", "Property Type", [
-                            "Barndominium (steel frame / metal siding)",
-                            "Pole-barn / post-frame home",
-                            "Metal building home",
-                            "Barndo + shop / workshop",
-                            "Not sure",
-                          ])}
-                          {select("squareFootage", "Square Footage", [
-                            "Under 1,000", "1,000–1,500", "1,500–2,500", "2,500–4,000", "4,000+",
-                          ])}
-                          {field("yearBuilt", "Year Built", "text", false)}
-                          {select("estimatedValue", "Estimated Replacement Value", [
-                            "Under $200K", "$200K–$400K", "$400K–$600K", "$600K–$1M", "Over $1M",
-                          ])}
-                          {select("farmOperations", "Farm / Ranch Operations on Site?", [
-                            "None — residence only",
-                            "Small hobby farm",
-                            "Working farm / ranch",
-                            "Agricultural income",
-                          ])}
-                          <div key="state">
-                            <label className="block font-body text-sm font-bold text-bark mb-1.5">
-                              State<span className="text-ember-orange ml-1">*</span>
-                            </label>
-                            <select
-                              name="state"
-                              required
-                              value={formData.state}
-                              onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                              className="w-full px-4 py-2.5 border border-border rounded-lg font-body text-sm text-bark focus:outline-none focus:border-forest-green bg-white"
-                            >
-                              <option value="">Select...</option>
-                              {STATE_OPTIONS.map(([value, label]) => (
-                                <option key={value} value={value}>{label}</option>
-                              ))}
-                            </select>
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                          {select("currentlyInsured", "Currently Insured?", ["Yes", "No"])}
-                          {field("desiredEffectiveDate", "Requested Coverage Start Date", "date", false)}
-                          {field("currentCarrier", "Current or Most Recent Insurance Carrier", "text", false)}
-                          {field("lossCount", "Claims in the Last 3 Years", "number", false)}
-                        </div>
-
-                        <div>
-                          <label className="block font-body text-sm font-bold text-bark mb-1.5">
-                            Claim Details: Dates, What Happened, Amounts
-                          </label>
-                          <textarea
-                            name="lossDescription"
-                            rows={3}
-                            value={formData.lossDescription}
-                            onChange={(e) => setFormData({ ...formData, lossDescription: e.target.value })}
-                            className="w-full px-4 py-2.5 border border-border rounded-lg font-body text-sm text-bark focus:outline-none focus:border-forest-green resize-none bg-white"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block font-body text-sm font-bold text-bark mb-1.5">
-                            Additional Notes
-                          </label>
-                          <textarea
-                            name="notes"
-                            rows={3}
-                            value={formData.notes}
-                            onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                            placeholder="Still building (need builders risk)? Attached shop or outbuildings? Coverage questions..."
-                            className="w-full px-4 py-2.5 border border-border rounded-lg font-body text-sm text-bark focus:outline-none focus:border-forest-green resize-none bg-white"
-                          />
-                        </div>
-
-                        {validationError && (
-                          <div className="rounded-lg border border-ember-orange/40 bg-ember-orange/10 px-4 py-3">
-                            <p className="font-body text-sm font-bold text-ember-orange">
-                              {validationError}
-                            </p>
-                          </div>
-                        )}
-
-                        {error && (
-                          <div className="rounded-lg border border-ember-orange/40 bg-ember-orange/10 px-4 py-3">
-                            <p className="font-body text-sm font-bold text-ember-orange">
-                              Something went wrong — please email{" "}
-                              <a href={`mailto:${SITE.email}`} className="underline">{SITE.email}</a> or try again.
-                            </p>
-                          </div>
-                        )}
-
-                        <button
-                          type="submit"
-                          disabled={loading}
-                          className="w-full bg-ember-orange text-white py-3.5 rounded-lg font-body font-bold hover:bg-ember-orange-dark transition-colors disabled:opacity-60"
-                        >
-                          {loading ? "Submitting..." : `Get My ${SITE.name} Quote →`}
-                        </button>
-                      </form>
-                    </div>
-                  )}
+                  <div className="bg-white rounded-2xl border border-border p-8">
+                    <h2 className="font-heading text-2xl text-bark font-bold mb-6">
+                      {SITE.name} Quote Request
+                    </h2>
+                    {/* Client component: native Netlify POST + full ACORD validation. See QuoteForm.tsx. */}
+                    <QuoteForm />
+                  </div>
                 </FadeIn>
               </div>
 
               <aside className="space-y-5">
                 <FadeIn direction="left">
                   <div className="bg-forest-green rounded-2xl p-7">
-                    <h3 className="font-heading text-lg text-white font-bold mb-3">Homeowners Application</h3>
+                    <h3 className="font-heading text-lg text-white font-bold mb-3">Prefer to Call?</h3>
                     <p className="font-body text-white/70 text-sm mb-4">
-                      Need full homeowners coverage? Complete our detailed application for the best rates.
+                      Our barndominium insurance specialists are ready to help you now.
                     </p>
-                    <Link href="/homeowners-application" className="flex items-center gap-2 text-ember-orange font-body font-bold">
-                      Start Application →
-                    </Link>
+                    <a href={SITE.phoneHref} className="flex items-center gap-2 text-ember-orange font-body font-bold">
+                      <Phone className="w-4 h-4" />{SITE.phone}
+                    </a>
+                    <p className="font-body text-white/50 text-xs mt-2">{SITE.hours}</p>
                   </div>
                 </FadeIn>
                 <FadeIn direction="left" delay={0.05}>

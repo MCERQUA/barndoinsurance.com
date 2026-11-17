@@ -488,7 +488,6 @@ An elevation certificate, prepared by a licensed surveyor, establishes your stru
 export const STATS = [
   { value: 20, suffix: "+", label: "Years Specialty Insurance" },
   { value: 50, suffix: " States", label: "Licensed Nationwide" },
-  { value: 1000, suffix: "+", label: "Barndos Insured" },
   { value: 24, suffix: " Hours", label: "Quote Turnaround" },
 ] as const;
 

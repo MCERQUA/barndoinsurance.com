@@ -34,7 +34,7 @@ export function Stats() {
       <div className="absolute inset-0 bg-grid-dark opacity-40 pointer-events-none" />
 
       <div className="relative container-xl">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-6 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-6 text-center">
           {STATS.map((s, i) => (
             <div
               key={s.label}

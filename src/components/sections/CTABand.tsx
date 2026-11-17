@@ -28,7 +28,7 @@ export function CTABand() {
           <p className="font-body text-lg text-white/80 mb-9 max-w-2xl mx-auto leading-relaxed">
             A real barndominium quote in minutes &mdash; replacement cost on the steel, the shop and
             outbuildings correctly classified, and builders-risk-to-dwelling handled in one place.
-            20+ years, all 50 states.
+            Licensed in all 50 states.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

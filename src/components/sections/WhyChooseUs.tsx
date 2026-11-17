@@ -52,8 +52,8 @@ export function WhyChooseUs() {
                 <BadgeCheck className="w-6 h-6" />
               </div>
               <div>
-                <p className="font-heading font-extrabold text-ink text-lg leading-none">20+ yrs</p>
-                <p className="font-body text-xs text-muted mt-1">50-state licensed</p>
+                <p className="font-heading font-extrabold text-ink text-lg leading-none">50 states</p>
+                <p className="font-body text-xs text-muted mt-1">Licensed nationwide</p>
               </div>
             </div>
           </FadeIn>

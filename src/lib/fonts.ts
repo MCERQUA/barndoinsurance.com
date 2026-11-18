@@ -1,20 +1,21 @@
-import { Roboto_Slab, Inter } from "next/font/google";
+import localFont from "next/font/local";
 
-// Barndo typography (blueprint §8): strong slab-serif heading (agricultural
-// authority + residential warmth — the "barn-meets-home" identity) + clean
-// readable sans body (Inter). Roboto Slab has full static weight instances →
-// reliable with next/font. CSS var names are unchanged from the template so
-// layout.tsx + the `font-heading` / `font-body` Tailwind families keep working.
-export const headingFont = Roboto_Slab({
-  subsets: ["latin"],
+// Self-hosted latin woff2 (src/lib/fonts/) instead of next/font/google, which
+// intermittently crashed the Netlify build (loader.js TypeError, exit 2) when
+// Google served a font URL with no extension. Same families, weights, CSS
+// variable names and display as before.
+export const headingFont = localFont({
+  src: [
+    { path: "./fonts/RobotoSlab-600-900.woff2", weight: "600 900", style: "normal" },
+  ],
   variable: "--font-heading",
-  weight: ["600", "700", "800", "900"],
   display: "swap",
 });
 
-export const bodyFont = Inter({
-  subsets: ["latin"],
+export const bodyFont = localFont({
+  src: [
+    { path: "./fonts/Inter-400-700.woff2", weight: "400 700", style: "normal" },
+  ],
   variable: "--font-body",
-  weight: ["400", "500", "600", "700"],
   display: "swap",
 });

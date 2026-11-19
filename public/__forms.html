@@ -47,6 +47,7 @@
   <input type="text" name="currentCarrier" />
   <input type="text" name="currentAnnualPremium" />
   <input type="text" name="yearsWithCurrentCarrier" />
+  <input type="date" name="currentPolicyExpiration" />
   <input type="text" name="namedOwners" />
   <input type="text" name="company" />
   <input type="date" name="purchaseDate" />
@@ -93,13 +94,16 @@
   <input type="text" name="squareFootage" />
   <input type="text" name="numberOfStories" />
   <input type="text" name="numberOfUnits" />
+  <select name="constructionStatus"><option value="Complete">Complete</option><option value="Under construction">Under construction</option><option value="Planned">Planned</option></select>
   <select name="constructionType"><option value="Frame (wood)">Frame (wood)</option><option value="Steel / metal frame">Steel / metal frame</option><option value="Post-frame / pole barn">Post-frame / pole barn</option><option value="Masonry">Masonry</option><option value="Masonry veneer">Masonry veneer</option><option value="Log">Log</option><option value="Concrete / ICF">Concrete / ICF</option><option value="Other">Other</option></select>
   <select name="exteriorWallMaterial"><option value="Metal siding">Metal siding</option><option value="Stucco">Stucco</option><option value="Brick">Brick</option><option value="Stone">Stone</option><option value="Vinyl siding">Vinyl siding</option><option value="Wood siding">Wood siding</option><option value="Fiber cement">Fiber cement</option><option value="Block / CMU">Block / CMU</option><option value="Other">Other</option></select>
   <select name="foundationType"><option value="Slab on grade">Slab on grade</option><option value="Crawlspace">Crawlspace</option><option value="Full basement">Full basement</option><option value="Partial basement">Partial basement</option><option value="Pier and beam">Pier and beam</option><option value="Other">Other</option></select>
+  <select name="insulationType"><option value="Spray foam">Spray foam</option><option value="Fiberglass">Fiberglass</option><option value="Mineral wool">Mineral wool</option><option value="Rigid board">Rigid board</option><option value="None">None</option><option value="Not sure">Not sure</option></select>
   <select name="roofShape"><option value="Gable">Gable</option><option value="Hip">Hip</option><option value="Flat">Flat</option><option value="Shed">Shed</option><option value="Gambrel">Gambrel</option><option value="Other">Other</option></select>
   <select name="roofMaterial"><option value="Metal (standing seam)">Metal (standing seam)</option><option value="Metal (corrugated / R-panel)">Metal (corrugated / R-panel)</option><option value="Asphalt shingle">Asphalt shingle</option><option value="Concrete / clay tile">Concrete / clay tile</option><option value="Slate">Slate</option><option value="Wood shake">Wood shake</option><option value="Membrane / flat roof">Membrane / flat roof</option><option value="Other">Other</option></select>
   <input type="text" name="roofYear" />
   <select name="roofCondition"><option value="Excellent">Excellent</option><option value="Good">Good</option><option value="Fair">Fair</option><option value="Poor">Poor</option></select>
+  <input type="text" name="roofGaugeOrWindRating" />
   <input type="radio" name="roofReplaced" value="Yes" />
   <input type="radio" name="roofReplaced" value="No" />
   <input type="text" name="roofReplacementCost" />
@@ -124,6 +128,7 @@
   <input type="text" name="otherStructureValue" />
   <input type="text" name="detachedGarageShopSqFt" />
   <input type="text" name="guestHouseSqFt" />
+  <input type="text" name="shopSqFt" />
   <input type="text" name="fenceTypeLength" />
   <input type="radio" name="historicHome" value="Yes" />
   <input type="radio" name="historicHome" value="No" />
@@ -193,6 +198,7 @@
   <input type="text" name="distanceToFireHydrantFeet" />
   <input type="text" name="distanceToFireStationMiles" />
   <select name="fireDepartmentType"><option value="Paid / career">Paid / career</option><option value="Volunteer">Volunteer</option><option value="Combination">Combination</option><option value="None / unprotected">None / unprotected</option></select>
+  <select name="protectionClass"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="Not sure">Not sure</option></select>
   <input type="radio" name="knobAndTubeWiring" value="Yes" />
   <input type="radio" name="knobAndTubeWiring" value="No" />
   <input type="radio" name="badPlumbing" value="Yes" />
@@ -342,6 +348,8 @@
   <input type="text" name="mortgageeCity" />
   <select name="mortgageeState"><option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="DE">DE</option><option value="DC">DC</option><option value="FL">FL</option><option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option><option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option><option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option></select>
   <input type="text" name="mortgageeZip" />
+  <input type="text" name="additionalInterestName" />
+  <input type="text" name="additionalInterestAddress" />
   <input type="radio" name="emailDocuments" value="Yes" />
   <input type="radio" name="emailDocuments" value="No" />
   <input type="radio" name="mailDocuments" value="Yes" />

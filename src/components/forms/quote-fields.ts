@@ -81,10 +81,13 @@ const RV_BOAT = ["None", "RV", "Boat", "RV and boat"];
 const COMM_VEH = ["None", "Work truck or van", "Heavy commercial vehicle"];
 const SOLAR = ["None", "Owned", "Leased"];
 const LOSS_STATUS = ["Open", "Closed"];
+const CONSTRUCTION_STATUS = ["Complete", "Under construction", "Planned"];
+const INSULATION = ["Spray foam", "Fiberglass", "Mineral wool", "Rigid board", "None", "Not sure"];
+const PROTECTION_CLASS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Not sure"];
 
 export const OPTION_LISTS = {
   MARITAL, PROPERTY_TYPE, FARM_OPS, REASONS, PRIOR_RES, OCCUPANCY, PURCHASE, CONSTRUCTION, EXTERIOR, FOUNDATION,
-  ROOF_SHAPE, ROOF_MAT, ROOF_COND, GARAGE, QUALITY, WIRING, PLUMBING, WATER_HEATER, SEWER, HEAT, AC, WATER,
+  ROOF_SHAPE, ROOF_MAT, ROOF_COND, GARAGE, CONSTRUCTION_STATUS, INSULATION, PROTECTION_CLASS, QUALITY, WIRING, PLUMBING, WATER_HEATER, SEWER, HEAT, AC, WATER,
   FIRE_DEPT, RV_BOAT, COMM_VEH, SOLAR, LOSS_STATUS,
 };
 
@@ -221,6 +224,7 @@ export const SECTIONS: Section[] = [
       t("currentCarrier", "Current carrier", 47, { lvl: 1, show: yes("currentlyInsured") }),
       m("currentAnnualPremium", "Current annual premium ($)", { lvl: 1, show: yes("currentlyInsured"), min: 1 }),
       n("yearsWithCurrentCarrier", "Years with current carrier", { lvl: 1, show: yes("currentlyInsured"), hi: 80, hint: "Whole years; enter 0 if under a year." }),
+      d("currentPolicyExpiration", "Current policy expiration date", "any", { lvl: 1, show: yes("currentlyInsured"), req: false }),
     ],
   },
   {
@@ -267,13 +271,16 @@ export const SECTIONS: Section[] = [
       n("squareFootage", "Total living area (exact sq ft)", { min: 100, hi: 100000, hint: "Exact square feet, numbers only." }),
       n("numberOfStories", "Number of stories", { min: 1, hi: 10 }),
       n("numberOfUnits", "Number of units", { min: 1, hi: 20 }),
+      s("constructionStatus", "Construction status", CONSTRUCTION_STATUS, { req: false }),
       s("constructionType", "Construction type", CONSTRUCTION),
       s("exteriorWallMaterial", "Exterior wall material", EXTERIOR),
       s("foundationType", "Foundation type", FOUNDATION),
+      s("insulationType", "Insulation type", INSULATION, { req: false }),
       s("roofShape", "Roof shape", ROOF_SHAPE),
       s("roofMaterial", "Roof material", ROOF_MAT),
       { name: "roofYear", label: "Roof year (year installed)", kind: "year", min: 1800 },
       s("roofCondition", "Roof condition", ROOF_COND),
+      t("roofGaugeOrWindRating", "Roof metal gauge or wind rating (if known)", 42, { req: false }),
       r("roofReplaced", "Has the roof been replaced?"),
       m("roofReplacementCost", "Roof replacement cost ($)", { lvl: 1, show: yes("roofReplaced"), min: 1 }),
       d("roofPermitDate", "Roof permit date (if known)", "past", { lvl: 1, show: yes("roofReplaced"), req: false }),
@@ -296,6 +303,7 @@ export const SECTIONS: Section[] = [
       m("otherStructureValue", "Total value of detached structure(s) ($)", { lvl: 1, show: yes("hasDetachedStructures"), min: 1 }),
       n("detachedGarageShopSqFt", "Detached garage / shop sq ft (if any)", { lvl: 1, show: yes("hasDetachedStructures"), req: false }),
       n("guestHouseSqFt", "Guest house sq ft (if any)", { lvl: 1, show: yes("hasDetachedStructures"), req: false }),
+      n("shopSqFt", "Shop sq ft (if any)", { lvl: 1, show: yes("hasDetachedStructures"), req: false }),
       t("fenceTypeLength", "Fence type / length (if any)", 42, { lvl: 1, show: yes("hasDetachedStructures"), req: false }),
       h("Special construction"),
       ...pairs(YN_SPECIAL),
@@ -336,6 +344,7 @@ export const SECTIONS: Section[] = [
       n("distanceToFireHydrantFeet", "Distance to fire hydrant (feet)", { hi: 100000 }),
       { name: "distanceToFireStationMiles", label: "Distance to fire station (miles)", kind: "dec", min: 0, hint: "For example 1.8." },
       s("fireDepartmentType", "Fire department type", FIRE_DEPT),
+      s("protectionClass", "Fire protection class (if known)", PROTECTION_CLASS, { req: false }),
       h("Condition of the home"),
       r("knobAndTubeWiring", "Any knob-and-tube, aluminum, or cloth wiring?"),
       r("badPlumbing", "Any polybutylene, galvanized, or lead plumbing?"),
@@ -419,6 +428,8 @@ export const SECTIONS: Section[] = [
       t("mortgageeCity", "Mortgagee city", 26, { lvl: 1, show: yes("hasMortgage") }),
       st("mortgageeState", "Mortgagee state", { lvl: 1, show: yes("hasMortgage") }),
       { name: "mortgageeZip", label: "Mortgagee ZIP code", kind: "zip", max: 5, lvl: 1, show: yes("hasMortgage"), hint: "5-digit ZIP code." },
+      t("additionalInterestName", "Additional interest name (if any, other than mortgagee)", 63, { req: false }),
+      t("additionalInterestAddress", "Additional interest address (if any)", 82, { req: false }),
     ],
   },
   {

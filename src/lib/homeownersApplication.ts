@@ -555,11 +555,7 @@ export const HOMEOWNERS_APPLICATION: HASection[] = [
         heading: "APPLICANT AUTHORIZATION",
         items: [
           { kind: "prose", text: "I certify that the information in this application is true and complete to the best of my knowledge. I understand that material misrepresentation or omission may affect eligibility, coverage, or claims. I authorize the insurer and its representatives to obtain insurance scores, loss history, inspection data, and other underwriting information as permitted by law. This application does not bind coverage." },
-          { kind: "field", field: { name: "applicant_signature_276", label: "Applicant Signature", type: "text", maxlen: 100 } },
-          { kind: "field", field: { name: "date_277", label: "Date", type: "text", maxlen: 100 } },
           { kind: "field", field: { name: "producer___agency_278", label: "Producer / Agency", type: "text", maxlen: 100 } },
-          { kind: "field", field: { name: "co-applicant_signature_279", label: "Co-Applicant Signature", type: "text", maxlen: 100 } },
-          { kind: "field", field: { name: "date_280", label: "Date", type: "text", maxlen: 100 } },
           { kind: "field", field: { name: "producer_phone_281", label: "Producer Phone", type: "text", maxlen: 100 } },
         ],
       },
@@ -844,11 +840,7 @@ export const HA_FIELD_NAMES: string[] = [
   "loss_runs_attached_273",
   "inspection_attached_274",
   "photos_attached_275",
-  "applicant_signature_276",
-  "date_277",
   "producer___agency_278",
-  "co-applicant_signature_279",
-  "date_280",
   "producer_phone_281",
 ];
 

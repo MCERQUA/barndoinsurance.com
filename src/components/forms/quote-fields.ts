@@ -448,14 +448,6 @@ export const SECTIONS: Section[] = [
     intro: "Do not attach or type documents here. Your agent will arrange to collect anything you mark Yes.",
     defs: [...pairs(YN_DOCS), ...pairs(YN_ATTACH)],
   },
-  {
-    title: "Signature",
-    intro: "Type your full legal name as your electronic signature and enter today's date.",
-    defs: [
-      t("applicantSignature", "Applicant signature (type your full legal name)", 62, { auto: "off" }),
-      d("signatureDate", "Signature date (today)", "past"),
-    ],
-  },
 ];
 
 export const YN_NAMES = [
@@ -603,8 +595,6 @@ export function validate(raw: Values, today: string): Problem[] {
     if (parseInt(v.lossCount, 10) < rows) flag("lossCount", "How many claims or losses?", "The number of claims cannot be fewer than the loss rows you filled in.");
   }
 
-  if (v.signatureDate && today !== "0000-00-00" && v.signatureDate !== today)
-    flag("signatureDate", "Signature date", "The signature date must be today's date.");
   // attestation
   if (v.applicantAttestation !== "Yes") p.push({ name: "applicantAttestation", label: "Confirmation that the information is accurate", message: "Please confirm the information is accurate before submitting." });
   return p;

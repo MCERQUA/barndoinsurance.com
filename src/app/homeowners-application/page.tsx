@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CheckCircle, Mail, ArrowRight, Download } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
@@ -18,7 +18,16 @@ import {
 /** DOM id for a PDF field name (names contain "/", "(", "," and spaces). */
 const idFor = (name: string) => `ha-${name.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
 
-const isRequired = (name: string) => HA_REQUIRED.includes(name);
+/**
+ * Explanation boxes the application expects for a "Yes" answer (Yes checkbox -> box it is
+ * explained in). Optional until one of its Yes boxes is ticked; then required, so a Yes is
+ * never sent without its explanation.
+ */
+const EXPLAIN_FOR: Record<string, string[]> = {
+  "describe_any_business,_rental,_or_unusual_occupancy_exposure_71": ["yes_63", "yes_65", "yes_67", "yes_69"],
+  "explain_any_yes_answers_and_list_completed_updates_with_dates_163": ["yes_155", "yes_157", "yes_159", "yes_161"],
+  "explain_any_yes_answers,_including_safeguards_and_dates_199": ["yes_189", "yes_191", "yes_193", "yes_195", "yes_197"],
+};
 
 /** Fields the PDF lays out as a full-width multi-line box. */
 const isLongText = (label: string) =>
@@ -36,9 +45,23 @@ type Values = Record<string, string>;
 export default function HomeownersApplicationPage() {
   const [values, setValues] = useState<Values>({});
   const [botField, setBotField] = useState("");
+  const [attribution, setAttribution] = useState({ traffic_source: "", landing_url: "" });
+  useEffect(() => {
+    try {
+      const p = new URLSearchParams(window.location.search);
+      let src = p.get("utm_source") || p.get("ref") || "";
+      if (!src && document.referrer) {
+        try { src = new URL(document.referrer).hostname; } catch { src = document.referrer; }
+      }
+      setAttribution({ traffic_source: src || "direct", landing_url: window.location.href });
+    } catch { /* best-effort, never blocks the form */ }
+  }, []);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
+
+  const isRequired = (name: string) =>
+    HA_REQUIRED.includes(name) || (EXPLAIN_FOR[name] ?? []).some((y) => values[y] === "Yes");
 
   const setText = (name: string, v: string) =>
     setValues((prev) => ({ ...prev, [name]: v }));
@@ -65,6 +88,8 @@ export default function HomeownersApplicationPage() {
     payload.append("bot-field", "");
     // every one of the 281 fields, in PDF order
     for (const name of HA_FIELD_NAMES) payload.append(name, values[name] ?? "");
+    payload.append("traffic_source", attribution.traffic_source);
+    payload.append("landing_url", attribution.landing_url);
 
     try {
       const res = await fetch("/__forms.html", {
@@ -93,6 +118,7 @@ export default function HomeownersApplicationPage() {
           id={idFor(f.name)}
           name={f.name}
           rows={3}
+          required={isRequired(f.name)}
           maxLength={f.maxlen}
           value={values[f.name] ?? ""}
           onChange={(e) => setText(f.name, e.target.value)}
@@ -208,6 +234,8 @@ export default function HomeownersApplicationPage() {
                 onSubmit={handleSubmit}
               >
                 <input type="hidden" name="form-name" value={HA_FORM_NAME} />
+                <input type="hidden" name="traffic_source" value={attribution.traffic_source} readOnly />
+                <input type="hidden" name="landing_url" value={attribution.landing_url} readOnly />
                 <p hidden>
                   <label>
                     Don&apos;t fill this out:{" "}

@@ -63,6 +63,10 @@ export default function HomeownersApplicationPage() {
   const isRequired = (name: string) =>
     HA_REQUIRED.includes(name) || (EXPLAIN_FOR[name] ?? []).some((y) => values[y] === "Yes");
 
+  /** An explanation box is only shown once one of its Yes boxes is ticked. */
+  const isHidden = (name: string) =>
+    name in EXPLAIN_FOR && !EXPLAIN_FOR[name].some((y) => values[y] === "Yes");
+
   const setText = (name: string, v: string) =>
     setValues((prev) => ({ ...prev, [name]: v }));
 
@@ -273,7 +277,7 @@ export default function HomeownersApplicationPage() {
                           {/* text fields, two-up */}
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             {group.items.map((item, ii) =>
-                              item.kind === "field" && item.field.type === "text" ? (
+                              item.kind === "field" && item.field.type === "text" && !isHidden(item.field.name) ? (
                                 <div
                                   key={ii}
                                   className={

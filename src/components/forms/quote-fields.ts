@@ -377,12 +377,23 @@ export const SECTIONS: Section[] = [
       r("steepTerrainOrCliff", "Any unusually steep terrain, retaining wall, or cliff exposure?"),
       r("priorForeclosureBankruptcyCancellation", "Any prior foreclosure, bankruptcy, or insurance cancellation?"),
       r("felonyOrFraudResident", "Does any resident have a felony conviction or fraud-related offense?"),
+      a("firearmsExplanation", "Firearms on premises: describe the firearms and how they are stored / secured", 132, { lvl: 1, show: yes("firearmsOnPremises") }),
+      a("solidFuelExplanation", "Solid-fuel appliance: describe the type, location, installation and last inspection", 132, { lvl: 1, show: yes("solidFuelAppliance") }),
       a("hazardsExplanation", "Explain each Yes above, including safeguards and dates", 132, {
-        lvl: 1, show: anyYes("firearmsOnPremises", "solidFuelAppliance", "steepTerrainOrCliff", "priorForeclosureBankruptcyCancellation", "felonyOrFraudResident"),
+        lvl: 1, show: anyYes("steepTerrainOrCliff", "priorForeclosureBankruptcyCancellation", "felonyOrFraudResident"),
       }),
       n("numberOfVehiclesGaraged", "Number of vehicles garaged", { hi: 50, hint: "Enter 0 if none." }),
       s("rvBoatStored", "RV / boat stored on site", RV_BOAT),
       s("commercialVehicleUse", "Commercial vehicle use", COMM_VEH),
+    ],
+  },
+  {
+    title: "Property Exposures & Updates",
+    intro: "Please answer each in your own words. If none, write \"None\".",
+    defs: [
+      a("businessRentalExposureDescription", "Describe any business, rental, or unusual occupancy exposure at the property", 132),
+      a("additionsDetachedStructuresDescription", "Describe any additions or detached structures (shop, guest house, barn, etc.)", 132),
+      a("electricalPlumbingUpdatesDescription", "Describe any electrical or plumbing updates (what, when, who did the work)", 132),
     ],
   },
   {
@@ -436,6 +447,14 @@ export const SECTIONS: Section[] = [
     title: "Documents & Preferences",
     intro: "Do not attach or type documents here. Your agent will arrange to collect anything you mark Yes.",
     defs: [...pairs(YN_DOCS), ...pairs(YN_ATTACH)],
+  },
+  {
+    title: "Signature",
+    intro: "Type your full legal name as your electronic signature and enter today's date.",
+    defs: [
+      t("applicantSignature", "Applicant signature (type your full legal name)", 62, { auto: "off" }),
+      d("signatureDate", "Signature date (today)", "past"),
+    ],
   },
 ];
 
@@ -584,6 +603,8 @@ export function validate(raw: Values, today: string): Problem[] {
     if (parseInt(v.lossCount, 10) < rows) flag("lossCount", "How many claims or losses?", "The number of claims cannot be fewer than the loss rows you filled in.");
   }
 
+  if (v.signatureDate && today !== "0000-00-00" && v.signatureDate !== today)
+    flag("signatureDate", "Signature date", "The signature date must be today's date.");
   // attestation
   if (v.applicantAttestation !== "Yes") p.push({ name: "applicantAttestation", label: "Confirmation that the information is accurate", message: "Please confirm the information is accurate before submitting." });
   return p;
